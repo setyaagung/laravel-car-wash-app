@@ -44,7 +44,7 @@ class LayananController extends Controller
             'nama' => $request->nama,
             'harga' => $request->harga
         ]);
-        return redirect('/siswa')->with('update', 'Data Berhasil diperbarui');
+        return redirect('/layanan')->with('update', 'Data Berhasil diperbarui');
     }
 
     public function delete(Layanan $layanan)

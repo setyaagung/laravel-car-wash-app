@@ -8,7 +8,7 @@
 						<div id="subMaster" class="collapse ">
 							<ul class="nav">
 								<li><a href="/layanan" class="">Layanan</a></li>
-								<li><a href="#" class="">Karyawan</a></li>
+								<li><a href="/karyawan" class="">Karyawan</a></li>
 								<li><a href="#" class="">Supplier</a></li>
 								<li><a href="#" class="">Pelanggan</a></li>
 							</ul>

@@ -11,12 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+//layanan
 Route::get('/layanan', 'LayananController@index');
 Route::post('/layanan/create', 'LayananController@create');
 Route::get('/layanan/{layanan}/edit', 'LayananController@edit');
 Route::post('/layanan/{layanan}/update', 'LayananController@update');
 Route::get('/layanan/{layanan}/delete', 'LayananController@delete');
+
+//Karyawan
+Route::get('/karyawan', 'KaryawanController@index');
+Route::post('/karyawan/create', 'KaryawanController@create');
+Route::get('/karyawan/{karyawan}/edit', 'KaryawanController@edit');
+Route::post('/karyawan/{karyawan}/update', 'KaryawanController@update');
+Route::get('/karyawan/{karyawan}/delete', 'KaryawanController@delete');
