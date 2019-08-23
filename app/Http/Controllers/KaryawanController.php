@@ -55,6 +55,12 @@ class KaryawanController extends Controller
         return redirect('/karyawan')->with('update', 'Data Berhasil diperbarui');
     }
 
+    public function profile(Karyawan $karyawan)
+    {
+        
+        return view('master/karyawan/profile', compact('karyawan'));
+    }
+
     public function delete(Karyawan $karyawan)
     {
         Layanan::destroy($karyawan->id);

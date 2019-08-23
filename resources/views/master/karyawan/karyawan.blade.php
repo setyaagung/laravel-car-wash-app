@@ -31,7 +31,7 @@
                                 @foreach($data_karyawan as $karyawan)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{$karyawan->nama}}</td>
+                                        <td><a href="/karyawan/{{$karyawan->id}}/profile">{{$karyawan->nama}}</a></td>
                                         <td>{{$karyawan->job}}</td>
                                         <td>{{$karyawan->no_hp}}</td>
                                         <td>{{$karyawan->gaji}}</td>
