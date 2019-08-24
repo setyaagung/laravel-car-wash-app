@@ -43,6 +43,15 @@ class KaryawanController extends Controller
 
     public function update(Request $request, Karyawan $karyawan)
     {
+        $this->validate($request, [
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'job' => 'required',
+            'alamat' => 'required',
+            'no_hp' => 'required',
+            'gaji' => 'required'
+        ]);
+
         Karyawan::where('id', $karyawan->id)
         ->update([
             'nama' => $request->nama,
@@ -63,7 +72,7 @@ class KaryawanController extends Controller
 
     public function delete(Karyawan $karyawan)
     {
-        Layanan::destroy($karyawan->id);
+        Karyawan::destroy($karyawan->id);
         return redirect('/karyawan')->with('delete', 'Data Berhasil Dihapus');
     }
 }

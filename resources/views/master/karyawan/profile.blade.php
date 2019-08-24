@@ -17,7 +17,7 @@
 								<div class="profile-header">
 									<div class="overlay"></div>
 									<div class="profile-main">
-										<img src="assets/img/user-medium.png" class="img-circle" alt="Avatar">
+										<img src="{{asset('template/assets/img/akun.png')}}" class="img-circle" alt="Avatar" width="40%">
 										<h3 class="name">Samuel Gold</h3>
 										<span class="online-status status-available">Available</span>
 									</div>
@@ -49,7 +49,7 @@
                                             <li>Gaji <span>{{$karyawan->gaji}}</span></li>
                                         </ul>
 									</div>
-									<div class="text-center"><a href="#" class="btn btn-primary">Edit Profile</a></div>
+									<div class="text-center"><a href="/karyawan/{{$karyawan->id}}/edit" class="btn btn-primary">Edit Profile</a></div>
 								</div>
 								<!-- END PROFILE DETAIL -->
 							</div>

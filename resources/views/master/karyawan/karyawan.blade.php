@@ -106,7 +106,7 @@
                     </div>
                     <div class="form-group @error('no_hp') has-error @enderror">
                         <label><b>Gaji</b></label>
-                        <input type="number" class="form-control" name="gaji" placeholder="Gaji" value="{{old('no_hp')}}">
+                        <input type="number" class="form-control" name="gaji" placeholder="Gaji" value="{{old('gaji')}}">
                         @error('gaji')
                             <span class="help-block">{{ $message }}</span>
                         @enderror
@@ -128,7 +128,7 @@
            var karyawan_id = $(this).attr('id');
            swal({
               title: "Yakin ?",
-              text: "Ingin meenghapus data layanan ini dengan id "+karyawan_id+" ??",
+              text: "Ingin meenghapus data karyawan ini dengan id "+karyawan_id+" ??",
               icon: "warning",
               buttons: true,
               dangerMode: true,

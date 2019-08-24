@@ -2,7 +2,8 @@
 	<div class="sidebar-scroll">
 		<nav>
 			<ul class="nav">
-				<li><a href="#"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+				<li><a href="/dashboard"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+				@if (auth()->user()->role == 'admin')
 				<li>
 					<a href="#subMaster" data-toggle="collapse" class="collapsed"><i class="lnr lnr-screen"></i> <span>Master</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 						<div id="subMaster" class="collapse ">
@@ -32,7 +33,8 @@
 							</ul>
 						</div>
 				</li>
-
+				<li><a href="/user"><i class="lnr lnr-user"></i> <span>Users</span></a></li>
+				@endif
 			</ul>
 		</nav>
 	</div>
