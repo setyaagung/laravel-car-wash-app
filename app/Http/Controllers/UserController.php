@@ -31,6 +31,28 @@ class UserController extends Controller
         $user->save();
         return redirect('/user')->with('create', 'Data Berhasil Ditambahkan');
     }
+    
+    public function edit(User $user)
+    {
+        return view('master/user/edit', compact('user'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'role' => 'required',
+            'email' => 'required|email|unique:users',
+        ]);
+
+        User::where('id', $user->id)
+        ->update([
+            'name' => $request->name,
+            'role' => $request->role,
+            'email' => $request->email,
+        ]);
+        return redirect('/user')->with('update', 'Data Berhasil diperbarui');
+    }
 
     public function delete(User $user)
     {

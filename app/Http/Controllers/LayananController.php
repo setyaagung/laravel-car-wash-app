@@ -38,6 +38,12 @@ class LayananController extends Controller
 
     public function update(Request $request, Layanan $layanan)
     {
+        $this->validate($request, [
+            'kategori' => 'required',
+            'nama' => 'required|min:3',
+            'harga' => 'required',
+        ]);
+        
         Layanan::where('id', $layanan->id)
         ->update([
             'kategori' => $request->kategori,

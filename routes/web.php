@@ -33,6 +33,14 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']],function()
     Route::get('/karyawan/{karyawan}/profile', 'KaryawanController@profile');
     Route::get('/karyawan/{karyawan}/delete', 'KaryawanController@delete');
 
+    //Shift
+    Route::get('/shift', 'ShiftController@index');
+    Route::post('/shift/create', 'ShiftController@create');
+    Route::get('/shift/{shift}/edit', 'ShiftController@edit');
+    Route::post('/shift/{shift}/update', 'ShiftController@update');
+    Route::get('/shift/{shift}/profile', 'ShiftController@profile');
+    Route::get('/shift/{shift}/delete', 'ShiftController@delete');
+
     //User
     Route::get('/user', 'UserController@index');
     Route::post('/user/create', 'UserController@create');

@@ -17,19 +17,26 @@
 						<div class="panel-body">
                             <form action="/layanan/{{$layanan->id}}/update" method="post" enctype="multipart/form-data">
                             @csrf
-                                <div class="form-group">
-                                    <label><b>Nama Kategori</b></label>
+                                <div class="form-group @error('kategori') has-error @enderror">
+                                    <label><b>Kategori</b></label>
                                     <input type="text" class="form-control" name="kategori" placeholder="Kategori" value="{{$layanan->kategori}}">
+                                    @error('kategori')
+                                        <span class="help-block">{{ $message }}</span>
+                                    @enderror
                                 </div>
-
-                                <div class="form-group">
-                                    <label><b>Nama Lengkap</b></label>
+                                <div class="form-group @error('nama') has-error @enderror">
+                                    <label><b>Nama Layanan</b></label>
                                     <input type="text" class="form-control" name="nama" placeholder="Nama Layanan" value="{{$layanan->nama}}">
+                                    @error('nama')
+                                        <span class="help-block">{{ $message }}</span>
+                                    @enderror
                                 </div>
-
-                                <div class="form-group">
+                                <div class="form-group @error('harga') has-error @enderror">
                                     <label><b>Harga</b></label>
                                     <input type="number" class="form-control" name="harga" placeholder="Harga" value="{{$layanan->harga}}">
+                                    @error('harga')
+                                        <span class="help-block">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 
                                 <div style="float: right;">
