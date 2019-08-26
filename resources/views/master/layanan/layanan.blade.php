@@ -32,7 +32,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{$layanan->kategori}}</td>
                                         <td>{{$layanan->nama}}</td>
-                                        <td>{{$layanan->harga}}</td>
+                                        <td>Rp. {{number_format($layanan->harga,0, ',' , '.')}}</td>
                                         <td>
                                             <a href="/layanan/{{$layanan->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
                                             <a href="#" class="btn btn-danger btn-sm delete" id="{{$layanan->id}}">Delete</a>

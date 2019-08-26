@@ -34,7 +34,7 @@
                                         <td><a href="/karyawan/{{$karyawan->id}}/profile">{{$karyawan->nama}}</a></td>
                                         <td>{{$karyawan->job}}</td>
                                         <td>{{$karyawan->no_hp}}</td>
-                                        <td>{{$karyawan->gaji}}</td>
+                                        <td>Rp. {{number_format($karyawan->gaji,0, ',' , '.')}}</td>
                                         <td>
                                             <a href="/karyawan/{{$karyawan->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
                                             <a href="#" class="btn btn-danger btn-sm delete" id="{{$karyawan->id}}">Delete</a>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="form-group @error('no_hp') has-error @enderror">
                         <label><b>No HP</b></label>
-                        <input type="text" class="form-control" name="no_hp" placeholder="No HP" value="{{old('no_hp')}}">
+                        <input type="text" class="form-control" name="no_hp" placeholder="ex: 628xxxxxxxx" value="{{old('no_hp')}}">
                         @error('no_hp')
                             <span class="help-block">{{ $message }}</span>
                         @enderror

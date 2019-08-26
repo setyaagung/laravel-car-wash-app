@@ -38,7 +38,6 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']],function()
     Route::post('/shift/create', 'ShiftController@create');
     Route::get('/shift/{shift}/edit', 'ShiftController@edit');
     Route::post('/shift/{shift}/update', 'ShiftController@update');
-    Route::get('/shift/{shift}/profile', 'ShiftController@profile');
     Route::get('/shift/{shift}/delete', 'ShiftController@delete');
 
     //User

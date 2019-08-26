@@ -19,7 +19,7 @@
 							<table class="table table-hover">
 								<thead>
 									<tr>
-                                        <th>N0</th>
+                                        <th>NO</th>
                                         <th>NAMA</th>
                                         <th>MULAI</th>
                                         <th>SELESAI</th>
@@ -34,8 +34,8 @@
                                         <td>{{$shift->mulai}}</td>
                                         <td>{{$shift->selesai}}</td>
                                         <td>
-                                            <a href="/shift/{{$user->id}}/shift" class="btn btn-warning btn-sm">Edit</a>
-                                            <a href="#" class="btn btn-danger btn-sm delete" id="{{$user->id}}">Delete</a>
+                                            <a href="/shift/{{$shift->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="#" class="btn btn-danger btn-sm delete" id="{{$shift->id}}">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -45,8 +45,8 @@
 											<li>Jenis Kelamin <span>{{$karyawan->jenis_kelamin}}</span></li>
 											<li>Job <span>{{$karyawan->job}}</span></li>
                                             <li>Alamat <span>{{$karyawan->alamat}}</span></li>
-											<li>No HP <span>{{$karyawan->no_hp}}</a></span></li>
-                                            <li>Gaji <span>{{$karyawan->gaji}}</span></li>
+											<li>No HP <span>{{number_format($karyawan->no_hp,0, ',' , '-')}}</a></span></li>
+                                            <li>Gaji <span>Rp. {{number_format($karyawan->gaji,0, ',' , '.')}}</span></li>
                                         </ul>
 									</div>
 									<div class="text-center"><a href="/karyawan/{{$karyawan->id}}/edit" class="btn btn-primary">Edit Profile</a></div>
