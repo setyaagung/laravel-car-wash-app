@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']],function()
     Route::get('/karyawan/{karyawan}/edit', 'KaryawanController@edit');
     Route::post('/karyawan/{karyawan}/update', 'KaryawanController@update');
     Route::get('/karyawan/{karyawan}/profile', 'KaryawanController@profile');
+    Route::post('/karyawan/{id}/addtanggungan', 'KaryawanController@addtanggungan');
     Route::get('/karyawan/{karyawan}/delete', 'KaryawanController@delete');
 
     //Shift
@@ -39,6 +40,11 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']],function()
     Route::get('/shift/{shift}/edit', 'ShiftController@edit');
     Route::post('/shift/{shift}/update', 'ShiftController@update');
     Route::get('/shift/{shift}/delete', 'ShiftController@delete');
+
+    //Tanggungan
+    Route::get('/tanggungan', 'TanggunganController@index');
+    Route::post('/tanggungan/create', 'TanggunganController@create');
+    Route::get('/tanggungan/{tanggungan}/delete', 'TanggunganController@delete');
 
     //User
     Route::get('/user', 'UserController@index');

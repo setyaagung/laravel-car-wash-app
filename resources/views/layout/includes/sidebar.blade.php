@@ -12,6 +12,7 @@
 								<li><a href="/karyawan" class="">Karyawan</a></li>
 								<li><a href="#" class="">Supplier</a></li>
 								<li><a href="/shift" class="">Shift</a></li>
+								<li><a href="/tanggungan" class="">Tanggungan</a></li>
 							</ul>
 						</div>
 				</li>

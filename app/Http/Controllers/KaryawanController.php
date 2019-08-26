@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Karyawan;
+use App\Tanggungan;
 
 use Illuminate\Http\Request;
 
@@ -66,8 +67,17 @@ class KaryawanController extends Controller
 
     public function profile(Karyawan $karyawan)
     {
+        $tanggungankaryawan = Tanggungan::all();
+        return view('master/karyawan/profile', compact(['karyawan','tanggungankaryawan']));
+    }
+
+    public function addtanggungan(Request $request, $id_karyawan)
+    {
+        $karyawan = Karyawan::find($id_karyawan);
         
-        return view('master/karyawan/profile', compact('karyawan'));
+        $karyawan->tanggungan()->attach($request->tanggungan, ['keterangan' => $request->keterangan, 'jumlah' => $request->jumlah, 'status' => $request->status]);
+
+        return redirect('karyawan/'.$id_karyawan.'/profile')->with('create','Data Tanggungan Berhasil Ditambahkan');
     }
 
     public function delete(Karyawan $karyawan)

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTanggunganKaryawanTable extends Migration
+class CreateKaryawanTanggunganTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateTanggunganKaryawanTable extends Migration
      */
     public function up()
     {
-        Schema::create('tanggungan_karyawan', function (Blueprint $table) {
+        Schema::create('karyawan_tanggungan', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('karyawan_id');
+            $table->integer('tanggungan_id');
             $table->string('tanggungan');
             $table->integer('jumlah');
             $table->enum('status', ['Lunas', 'Belum Lunas']);
@@ -30,6 +31,6 @@ class CreateTanggunganKaryawanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tanggungan_karyawan');
+        Schema::dropIfExists('karyawan_tanggungan');
     }
 }
