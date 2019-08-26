@@ -23,17 +23,17 @@ class KaryawanController extends Controller
             'job' => 'required',
             'alamat' => 'required',
             'no_hp' => 'required',
-            'gaji' => 'required'
+            'gaji' => 'required',
+            'avatar' => 'mimes:jpeg,jpg,png',
         ]);
 
-        Karyawan::create([
-            'nama' => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'job' => $request->job,
-            'alamat' => $request->alamat,
-            'no_hp' => $request->no_hp,
-            'gaji' => $request->gaji,
-        ]);
+        $karyawan = Karyawan::create($request->all());
+        if($request->hasFile('avatar'))
+        {
+            $request->file('avatar')->move('images/', $request->file('avatar')->getClientOriginalName());
+            $karyawan->avatar = $request->file('avatar')->getClientOriginalName();
+            $karyawan->save();
+        }
         return redirect('/karyawan')->with('create', 'Data Berhasil Ditambahkan');
     }
 
@@ -50,18 +50,18 @@ class KaryawanController extends Controller
             'job' => 'required',
             'alamat' => 'required',
             'no_hp' => 'required',
-            'gaji' => 'required'
+            'gaji' => 'required',
+            'avatar' => 'mimes:jpeg,jpg,png',
+            
         ]);
 
-        Karyawan::where('id', $karyawan->id)
-        ->update([
-            'nama' => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'job' => $request->job,
-            'alamat' => $request->alamat,
-            'no_hp' => $request->no_hp,
-            'gaji' => $request->gaji,
-        ]);
+        $karyawan->update($request->all());
+        if($request->hasFile('avatar'))
+        {
+            $request->file('avatar')->move('images/', $request->file('avatar')->getClientOriginalName());
+            $karyawan->avatar = $request->file('avatar')->getClientOriginalName();
+            $karyawan->save();
+        }
         return redirect('/karyawan')->with('update', 'Data Berhasil diperbarui');
     }
 

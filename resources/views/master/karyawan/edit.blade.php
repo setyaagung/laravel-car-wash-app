@@ -64,6 +64,14 @@
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>
+
+                                <div class="form-group @error('avatar') has-error @enderror">
+                                    <label><b>Avatar</b></label>
+                                    <input type="file" class="form-control" name="avatar">
+                                    @error('avatar')
+                                        <span class="help-block">{{ $message }}</span>
+                                    @enderror
+                                </div>
                                 
                                 <div style="float: right;">
                                     <button type="button" class="btn btn-secondary" onclick="javascript:history.back()">Kembali</button>
