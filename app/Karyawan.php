@@ -22,6 +22,11 @@ class Karyawan extends Model
 
     public function tanggungan()
     {
-        return $this->belongsToMany(Tanggungan::class)->withPivot(['keterangan','jumlah','status'])->withTimeStamps();
+        return $this->hasMany(Tanggungan::class);
+    }
+
+    public function absensi()
+    {
+        return $this->hasMany(Absensi::class);
     }
 }

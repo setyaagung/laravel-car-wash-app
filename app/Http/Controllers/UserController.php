@@ -45,12 +45,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
         ]);
 
-        User::where('id', $user->id)
-        ->update([
-            'name' => $request->name,
-            'role' => $request->role,
-            'email' => $request->email,
-        ]);
+        $user->update($request->all());
         return redirect('/user')->with('update', 'Data Berhasil diperbarui');
     }
 

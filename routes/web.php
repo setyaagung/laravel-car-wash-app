@@ -32,7 +32,15 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']],function()
     Route::post('/karyawan/{karyawan}/update', 'KaryawanController@update');
     Route::get('/karyawan/{karyawan}/profile', 'KaryawanController@profile');
     Route::post('/karyawan/{id}/addtanggungan', 'KaryawanController@addtanggungan');
+    Route::post('/karyawan/{id}/addabsensi', 'KaryawanController@addabsensi');
     Route::get('/karyawan/{karyawan}/delete', 'KaryawanController@delete');
+
+    //Supplier
+    Route::get('/supplier', 'SupplierController@index');
+    Route::post('/supplier/create', 'SupplierController@create');
+    Route::get('/supplier/{supplier}/edit', 'SupplierController@edit');
+    Route::post('/supplier/{supplier}/update', 'SupplierController@update');
+    Route::get('/supplier/{supplier}/delete', 'SupplierController@delete');
 
     //Shift
     Route::get('/shift', 'ShiftController@index');
@@ -41,10 +49,12 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']],function()
     Route::post('/shift/{shift}/update', 'ShiftController@update');
     Route::get('/shift/{shift}/delete', 'ShiftController@delete');
 
-    //Tanggungan
-    Route::get('/tanggungan', 'TanggunganController@index');
-    Route::post('/tanggungan/create', 'TanggunganController@create');
-    Route::get('/tanggungan/{tanggungan}/delete', 'TanggunganController@delete');
+    //Tagihan
+    Route::get('/tagihan', 'TagihanController@index');
+    Route::post('/tagihan/create', 'TagihanController@create');
+    Route::get('/tagihan/{tagihan}/edit', 'TagihanController@edit');
+    Route::post('/tagihan/{tagihan}/update', 'TagihanController@update');
+    Route::get('/tagihan/{tagihan}/delete', 'TagihanController@delete');
 
     //User
     Route::get('/user', 'UserController@index');

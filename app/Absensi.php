@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Tanggungan extends Model
+class Absensi extends Model
 {
-    protected $table= 'tanggungan';
-    protected $fillable = ['karyawan_id','keterangan','jumlah', 'status'];
+    use SoftDeletes;
+    protected $table = 'absensi';
+    protected $fillable = ['karyawan_id', 'jenis', 'keterangan', 'denda'];
 
     public function karyawan()
     {

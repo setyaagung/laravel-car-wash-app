@@ -76,9 +76,9 @@
 											@foreach ($karyawan->tanggungan as $tanggungan)
 												<tr>
 													<td>{{$tanggungan->created_at->format('d M Y')}}</td>
-													<td>{{$tanggungan->pivot->keterangan}}</td>
-													<td>Rp. {{number_format($tanggungan->pivot->jumlah,0, ',' , '.')}}</td>
-													@if($tanggungan->pivot->status == 'Belum Lunas')
+													<td>{{$tanggungan->keterangan}}</td>
+													<td>Rp. {{number_format($tanggungan->jumlah,0, ',' , '.')}}</td>
+													@if($tanggungan->status == 'Belum Lunas')
 														<td><span class="badge bg-danger">Belum Lunas</span></td>
 													@else
 														<td><span class="badge bg-success">Lunas</span></td>
@@ -92,7 +92,7 @@
 										</table>
 									</div>
 								</div>
-								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddAbsen">Input Absen</button>
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddAbsensi">Input Absen</button>
 								<div class="panel">
 									<div class="panel-heading">
 											<h3 class="panel-title">Absensi Karyawan</h3>
@@ -104,12 +104,23 @@
 														<th>TANGGAL</th>
 														<th>JENIS</th>
 														<th>KETERANGAN</th>
+														<th>DENDA</th>
 														<th>AKSI</th>
 													</tr>
 												</thead>
 												<tbody>
-												
-												</tbody>
+													@foreach ($karyawan->absensi as $absensi)
+														<tr>
+															<td>{{$absensi->created_at->format('d M Y')}}</td>
+															<td>{{$absensi->jenis}}</td>
+															<td>{{$absensi->keterangan}}</td>
+															<td>Rp. {{number_format($absensi->denda,0, ',' , '.')}}</td>
+															<td>
+																<a href="#" class="btn btn-danger btn-sm delete" id="{{$tanggungan->id}}">Delete</a>
+															</td>
+														</tr>
+													@endforeach
+													</tbody>
 											</table>
 										</div>
 									</div>
@@ -122,7 +133,7 @@
 			</div>
 			<!-- END MAIN CONTENT -->
 
-			<!-- Modal Tambah -->
+			<!-- Modal Tambah Tanggungan -->
 <div class="modal fade" id="AddTanggungan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -135,33 +146,21 @@
         <div class="modal-body">
             <form action="/karyawan/{{$karyawan->id}}/addtanggungan" method="post" enctype="multipart/form-data">
             @csrf
-                <div class="form-group @error('tanggungan') has-error @enderror">
-                    <label><b>Tanggungan</b></label>
-                    <select class="form-control" id="tanggungan" name="tanggungan">
-                        @foreach ($tanggungankaryawan as $t)
-							<option value="{{$t->id}}">{{$t->kategori}}</option>
-						@endforeach
-                     </select>
-                    @error('tanggungan')
-                        <span class="help-block">{{ $message }}</span>
-                    @enderror
+				<div class="form-group @error('keterangan') has-error @enderror">
+					<label><b>Keterangan</b></label>
+					<input type="text" class="form-control" name="keterangan" placeholder="Keterangan" value="{{old('keterangan')}}">
+					@error('keterangan')
+						<span class="help-block">{{ $message }}</span>
+					@enderror
 				</div>
 
-				<div class="form-group @error('keterangan') has-error @enderror">
-						<label><b>Keterangan</b></label>
-						<input type="text" class="form-control" name="keterangan" placeholder="Keterangan" value="{{old('keterangan')}}">
-						@error('keterangan')
-							<span class="help-block">{{ $message }}</span>
-						@enderror
-					</div>
-
 				<div class="form-group @error('jumlah') has-error @enderror">
-						<label><b>Jumlah</b></label>
-						<input type="number" class="form-control" name="jumlah" placeholder="Jumlah" value="{{old('jumlah')}}">
-						@error('jumlah')
-							<span class="help-block">{{ $message }}</span>
-						@enderror
-					</div>
+					<label><b>Jumlah</b></label>
+					<input type="number" class="form-control" name="jumlah" placeholder="Jumlah" value="{{old('jumlah')}}">
+					@error('jumlah')
+						<span class="help-block">{{ $message }}</span>
+					@enderror
+				</div>
 				
 				<div class="form-group @error('status') has-error @enderror">
                     <label><b>Status</b></label>
@@ -174,6 +173,58 @@
                         <span class="help-block">{{ $message }}</span>
                     @enderror
                 </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Tambah Absensi -->
+<div class="modal fade" id="AddAbsensi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h5 class="modal-title">Tambah Absensi</h5>
+        </div>
+        <div class="modal-body">
+            <form action="/karyawan/{{$karyawan->id}}/addabsensi" method="post" enctype="multipart/form-data">
+			@csrf
+				<div class="form-group @error('jenis') has-error @enderror">
+					<label><b>Jenis</b></label>
+					<select class="form-control" name="jenis">
+						<option value="">-- Jenis --</option>
+						<option value="Sakit" {{(old('jenis') == 'Sakit') ? 'selected' : ''}}>Sakit</option>
+						<option value="Izin" {{(old('jenis') == 'Izin') ? 'selected' : ''}}>Izin</option>
+						<option value="Alfa" {{(old('jenis') == 'Alfa') ? 'selected' : ''}}>Alfa</option>
+					</select>
+					@error('jenis')
+						<span class="help-block">{{ $message }}</span>
+					@enderror
+				</div>
+
+				<div class="form-group @error('keterangan') has-error @enderror">
+					<label><b>Keterangan</b></label>
+					<input type="text" class="form-control" name="keterangan" placeholder="Keterangan" value="{{old('keterangan')}}">
+					@error('keterangan')
+						<span class="help-block">{{ $message }}</span>
+					@enderror
+				</div>
+
+				<div class="form-group @error('denda') has-error @enderror">
+					<label><b>Denda</b></label>
+					<input type="number" class="form-control" name="denda" placeholder="Denda" value="{{old('denda')}}">
+					@error('denda')
+						<span class="help-block">{{ $message }}</span>
+					@enderror
+				</div>
+	
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

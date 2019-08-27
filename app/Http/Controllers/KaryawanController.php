@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Karyawan;
 use App\Tanggungan;
+use App\Absensi;
 
 use Illuminate\Http\Request;
 
@@ -74,10 +75,31 @@ class KaryawanController extends Controller
     public function addtanggungan(Request $request, $id_karyawan)
     {
         $karyawan = Karyawan::find($id_karyawan);
+        $tanggungan = Tanggungan::create([
+            'karyawan_id' => $id_karyawan,
+            'keterangan' => $request->keterangan,
+            'jumlah' => $request->jumlah,
+            'status' => $request->status
+        ]);
         
-        $karyawan->tanggungan()->attach($request->tanggungan, ['keterangan' => $request->keterangan, 'jumlah' => $request->jumlah, 'status' => $request->status]);
+        $karyawan->tanggungan()->save($tanggungan);
 
         return redirect('karyawan/'.$id_karyawan.'/profile')->with('create','Data Tanggungan Berhasil Ditambahkan');
+    }
+
+    public function addabsensi(Request $request, $id_karyawan)
+    {
+        $karyawan = Karyawan::find($id_karyawan);
+        $absensi = Absensi::create([
+            'karyawan_id' => $id_karyawan,
+            'jenis' => $request->jenis,
+            'keterangan' => $request->keterangan,
+            'denda' => $request->denda
+        ]);
+        
+        $karyawan->absensi()->save($absensi);
+
+        return redirect('karyawan/'.$id_karyawan.'/profile')->with('create','Data Absensi Berhasil Ditambahkan');
     }
 
     public function delete(Karyawan $karyawan)

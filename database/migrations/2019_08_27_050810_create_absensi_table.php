@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSoftDeleteToTanggungan extends Migration
+class CreateAbsensiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,13 @@ class AddSoftDeleteToTanggungan extends Migration
      */
     public function up()
     {
-        Schema::table('tanggungan', function (Blueprint $table) {
+        Schema::create('Absensi', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('karyawan_id');
+            $table->enum('jenis',['Sakit', 'Izin', 'Alfa']);
+            $table->text('keterangan');
+            $table->integer('denda');
+            $table->timestamps();
             $table->softDeletes();
         });
     }
@@ -25,8 +31,6 @@ class AddSoftDeleteToTanggungan extends Migration
      */
     public function down()
     {
-        Schema::table('tanggungan', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('Absensi');
     }
 }
