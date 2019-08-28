@@ -19,7 +19,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="{{asset('template/assets/img/apple-icon.png')}}">
-	<link rel="icon" type="image/png" sizes="96x96" href="{{asset('template/assets/img/favicon.png')}}">
+	<link rel="icon" type="image/png" sizes="96x96" href="{{asset('template/assets/img/2.jpg')}}">
 </head>
 
 <body>
@@ -31,7 +31,7 @@
 					<div class="left">
 						<div class="content">
 							<div class="header">
-								<div class="logo text-center"><img src="{{asset('template/assets/img/logo-dark.png')}}" alt="Klorofil Logo"></div>
+								<div class="logo text-center"><img src="{{asset('template/assets/img/3.jpg')}}" alt="TJ88 Logo" width="70%"></div>
 								<p class="lead">Login</p>
 							</div>
 							<form class="form-auth-small" action="/postlogin" method="POST">
@@ -49,11 +49,7 @@
 						</div>
 					</div>
 					<div class="right">
-						<div class="overlay"></div>
-						<div class="content text">
-							<h1 class="heading">TJ88 Car Wash Application</h1>
-							<p>by Agung</p>
-						</div>
+						
 					</div>
 					<div class="clearfix"></div>
 				</div>

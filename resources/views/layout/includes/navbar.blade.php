@@ -1,6 +1,6 @@
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="index.html"><img src="{{asset('template/assets/img/logo-dark.png')}}" alt="Klorofil Logo" class="img-responsive logo"></a>
+				<a href="#" class="img-responsive logo"><b>TJ88 Car Wash App</b></a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
