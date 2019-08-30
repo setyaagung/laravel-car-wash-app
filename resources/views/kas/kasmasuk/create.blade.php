@@ -45,7 +45,7 @@
                                     <label><b>Layanan</b></label>
                                     <select class="form-control" name="layanan_id" id="layanan_id">
                                         @foreach($layanan as $l)
-                                            <option value="{{$l->id}}">{{$l->nama}}</option>
+                                        <option value="{{$l->id}}">{{$l->nama}} / Rp. {{number_format($l->harga,0, ',' , '.')}}</option>
                                         @endforeach
                                     </select>
                                     @error('layanan'))
