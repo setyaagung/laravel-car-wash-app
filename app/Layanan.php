@@ -10,4 +10,5 @@ class Layanan extends Model
     protected $table = 'layanan';
     protected $fillable = ['kategori', 'nama', 'harga'];
     use SoftDeletes;
+
 }

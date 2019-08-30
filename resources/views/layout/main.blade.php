@@ -13,6 +13,8 @@
 	<link rel="stylesheet" href="{{asset('template/assets/vendor/linearicons/style.css')}}">
 	<link rel="stylesheet" href="{{asset('template/assets/vendor/toastr/toastr.min.css')}}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+  
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="{{asset('template/assets/css/main.css')}}">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
@@ -56,6 +58,7 @@
 	<script src="{{asset('template/assets/scripts/klorofil-common.js')}}"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	<script src="{{asset('frontend/js/ckeditor.js')}}"></script>
 	<script>
 		@if (Session::has('create'))
@@ -73,6 +76,11 @@
 		@if (Session::has('error'))
 			toastr.error("{{Session::get('error')}}", "Sudah Ada");
 		@endif
+	</script>
+	<script>
+		$(document).ready( function () {
+			$('#myTable').DataTable();
+		} );
 	</script>
 	@yield('footer')
 </body>

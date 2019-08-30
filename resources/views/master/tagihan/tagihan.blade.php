@@ -16,10 +16,10 @@
                             </div>
 						</div>
 						<div class="panel-body">
-							<table class="table table-hover">
+							<table class="table table-hover" id="myTable">
 								<thead>
 									<tr>
-                                        <th>N0</th>
+                                        <th>NO</th>
                                         <th>KATEGORI</th>
                                         <th>AKSI</th>
 									</tr>

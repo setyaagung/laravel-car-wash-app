@@ -56,6 +56,9 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']],function()
     Route::post('/tagihan/{tagihan}/update', 'TagihanController@update');
     Route::get('/tagihan/{tagihan}/delete', 'TagihanController@delete');
 
+    //Penjualan
+    
+
     //User
     Route::get('/user', 'UserController@index');
     Route::post('/user/create', 'UserController@create');
@@ -69,4 +72,6 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']],function()
 {
     //Dashboard
     Route::get('/dashboard', 'DashboardController@index');
+    Route::resource('/kas_masuk', 'KasMasukController');
+    Route::resource('/kas_keluar', 'KasKeluarController');
 });
