@@ -17,6 +17,14 @@
 						<div class="panel-body">
                             <form action="{{route('kas_masuk.store')}}" method="POST">
                             {{ csrf_field() }}
+                            <div class="form-group @error('tanggal') has-error @enderror">
+                                <label><b>Tanggal</b></label>
+                                <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{old('tanggal')}}">
+                                @error('tanggal'))
+                                    <span class="help-block">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                                 <div class="form-group @error('user_id') has-error @enderror">
                                     <label><b>User</b></label>
                                     <select class="form-control" name="user_id" id="user_id">
@@ -24,7 +32,7 @@
                                             <option value="{{$u->id}}">{{$u->name}}</option>
                                         @endforeach
                                     </select>
-                                    @error('layanan'))
+                                    @error('user'))
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -33,42 +41,51 @@
                                     <label><b>Shift</b></label>
                                     <select class="form-control" name="shift_id" id="shift_id">
                                         @foreach($shift as $s)
-                                            <option value="{{$s->id}}">{{$s->nama}}</option>
+                                            <option value="{{$s->id}}">{{$s->nama_shift}}</option>
                                         @endforeach
                                     </select>
                                     @error('shift_id'))
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>
-
+                        
                                 <div class="form-group @error('layanan_id') has-error @enderror">
                                     <label><b>Layanan</b></label>
-                                    <select class="form-control" name="layanan_id" id="layanan_id">
+                                    <select class="form-control dinamis" name="layanan_id" id="layanan_id">
+                                        <option value="">-- Pilih Layanan --</option>
                                         @foreach($layanan as $l)
-                                        <option value="{{$l->id}}">{{$l->nama}} / Rp. {{number_format($l->harga,0, ',' , '.')}}</option>
+                                            <option value="{{$l->id}}">{{$l->nama}}</option>
                                         @endforeach
                                     </select>
-                                    @error('layanan'))
+                                    @error('layanan_id'))
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>
 
+                                <div class="form-group @error('harga') has-error @enderror">
+                                    <label><b>Harga</b></label>
+                                    <input type="number" step="any" min="0" class="form-control" name="harga" id="harga" placeholder="Harga" value="{{ old('harga') }}">
+                                    @error('harga')
+                                        <span class="help-block">{{ $message }}</span>
+                                    @enderror
+                                </div>
+    
                                 <div class="form-group @error('jumlah') has-error @enderror">
                                     <label><b>Jumlah</b></label>
-                                    <input type="number" class="form-control" name="jumlah" placeholder="Jumlah" value="{{ old('jumlah') }}">
+                                    <input type="number" step="any" min="0" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" value="{{ old('jumlah') }}">
                                     @error('jumlah')
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>
-
+                                
                                 <div class="form-group @error('total') has-error @enderror">
                                     <label><b>Total</b></label>
-                                    <input type="number" class="form-control" name="total" placeholder="Total" value="{{ old('total') }}">
+                                    <input type="number" class="form-control" name="total" id="total" placeholder="Total" readonly value="{{ old('total') }}">
                                     @error('total')
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                
+    
                                 <div style="float: right;">
                                     <button type="button" class="btn btn-secondary" onclick="javascript:history.back()">Kembali</button>
                                     <button type="submit" class="btn btn-primary">Simpan</button>
@@ -105,7 +122,7 @@
                                 </tbody>
                             </table>
                         </div>
-					</div>
+                    </div>
 					<!-- END INPUTS -->
                 </div>
             </div>
@@ -113,4 +130,19 @@
     </div>
 </div>
 
+@endsection
+
+@section('footer')
+    <script type="text/javascript">
+        $("#jumlah").keyup(function(){
+            total = $("#jumlah").val()* $("#harga").val();
+        $("#total").val(total);
+        });
+
+       $("#harga").keyup(function(){
+            total = $("#jumlah").val()* $("#harga").val();
+        $("#total").val(total);
+        });
+
+    </script>
 @endsection

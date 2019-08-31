@@ -7,7 +7,7 @@ use App\KasMasuk;
 use App\User;
 use App\Layanan;
 use App\Shift;
-use Auth;
+use DB;
 
 class KasMasukController extends Controller
 {
@@ -18,7 +18,7 @@ class KasMasukController extends Controller
      */
     public function index()
     {
-        $kas_masuk = KasMasuk::all();
+        $kas_masuk = KasMasuk::join();
         return view('kas/kasmasuk/kas_masuk', compact('kas_masuk'));
     }
 
@@ -43,14 +43,17 @@ class KasMasukController extends Controller
      */
     public function store(Request $request)
     {
-        var_dump($_POST);
         $data = new KasMasuk();
+        $data->tanggal = $request->tanggal;
         $data->user_id = $request->user_id;
         $data->shift_id = $request->shift_id;
         $data->layanan_id = $request->layanan_id;
+        $data->harga = $request->harga;
         $data->jumlah = $request->jumlah;
         $data->total = $request->total;
         $data->save();
+
+        return redirect('/kas_masuk')->with('create', 'Data Kas Masuk Berhasil diinputkan');
     }
 
     /**

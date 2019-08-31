@@ -30,7 +30,7 @@
                                 @foreach($data_shift as $shift)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{$shift->nama}}</td>
+                                        <td>{{$shift->nama_shift}}</td>
                                         <td>{{$shift->mulai}}</td>
                                         <td>{{$shift->selesai}}</td>
                                         <td>
@@ -62,10 +62,10 @@
             <div class="modal-body">
                 <form action="/shift/create" method="post" enctype="multipart/form-data">
                 @csrf
-                    <div class="form-group @error('nama') has-error @enderror">
+                    <div class="form-group @error('nama_shift') has-error @enderror">
                         <label><b>Nama</b></label>
-                        <input type="text" class="form-control" name="nama" placeholder="Nama" value="{{old('nama')}}">
-                        @error('nama')
+                        <input type="text" class="form-control" name="nama_shift" placeholder="Nama Shift" value="{{old('nama_shift')}}">
+                        @error('nama_shift')
                             <span class="help-block">{{ $message }}</span>
                         @enderror
                     </div>

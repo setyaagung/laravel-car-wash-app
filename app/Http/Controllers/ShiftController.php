@@ -17,13 +17,13 @@ class ShiftController extends Controller
     {
         //validasi
     	$this->validate($request, [
-            'nama' => 'required',
+            'nama_shift' => 'required',
             'mulai' => 'required',
             'selesai' => 'required',
         ]);
 
         Shift::create([
-            'nama' => $request->nama,
+            'nama_shift' => $request->nama_shift,
             'mulai' => $request->mulai,
             'selesai' => $request->selesai,
         ]);
@@ -38,14 +38,14 @@ class ShiftController extends Controller
     public function update(Request $request, Shift $shift)
     {
         $this->validate($request, [
-            'nama' => 'required',
+            'nama_shift' => 'required',
             'mulai' => 'required',
             'selesai' => 'required',
         ]);
 
         Shift::where('id', $shift->id)
         ->update([
-            'nama' => $request->nama,
+            'nama_shift' => $request->nama_shift,
             'mulai' => $request->mulai,
             'selesai' => $request->selesai,
         ]);

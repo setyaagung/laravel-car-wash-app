@@ -20,16 +20,28 @@
 								<thead>
 									<tr>
                                         <th>NO</th>
-                                        <th>USER</th>
+                                        <th>TANGGAL</th>
                                         <th>SHIFT</th>
                                         <th>LAYANAN</th>
+                                        <th>HARGA</th>
                                         <th>JUMLAH</th>
                                         <th>TOTAL</th>
                                         <th>AKSI</th>
 									</tr>
 								</thead>
 								<tbody>
-                            
+                                    @foreach ($kas_masuk as $index)
+                                        <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{date('d M Y', strtotime($index->tanggal))}}</td>
+                                            <td>{{$index->nama_shift}}</td>
+                                            <td>{{$index->nama}}</td>
+                                            <td>Rp. {{number_format($index->harga,0, ',' , '.')}}</td>
+                                            <td>{{$index->jumlah}}</td>
+                                            <td>Rp. {{number_format($index->total,0, ',' , '.')}}</td>
+                                            <td>#</td>
+                                        </tr>
+                                    @endforeach
 								</tbody>
 							</table>
 						</div>

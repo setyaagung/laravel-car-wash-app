@@ -17,10 +17,10 @@
 						<div class="panel-body">
                             <form action="/shift/{{$shift->id}}/update" method="post" enctype="multipart/form-data">
                             @csrf
-                                <div class="form-group @error('nama') has-error @enderror">
+                                <div class="form-group @error('nama_shift') has-error @enderror">
                                     <label><b>Nama Shift</b></label>
-                                    <input type="text" class="form-control" name="nama" placeholder="Nama" value="{{$shift->nama}}">
-                                    @error('nama')
+                                    <input type="text" class="form-control" name="nama_shift" placeholder="Nama" value="{{$shift->nama_shift}}">
+                                    @error('nama_shift')
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>
