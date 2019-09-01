@@ -97,18 +97,18 @@
 @section('footer')
     <script>
         $('.delete').click(function() {
-           var id_layanan = $(this).attr('id_layanan');
+           var layanan_id = $(this).attr('id');
            swal({
               title: "Yakin ?",
-              text: "Ingin menghapus data layanan ini dengan id "+id_layanan+" ??",
+              text: "Ingin menghapus data layanan ini dengan id "+layanan_id+" ??",
               icon: "warning",
               buttons: true,
               dangerMode: true,
             })
             .then((willDelete) => {
-                console.log(willDelete);
                 if (willDelete) {
-                    window.location = "/layanan/"+id_layanan+"/delete";
+                    console.log(willDelete);
+                    window.location = "/layanan/"+layanan_id+"/delete";
                 }
             });
         });

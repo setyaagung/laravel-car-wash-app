@@ -72,7 +72,6 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']],function()
 {
     //Dashboard
     Route::get('/dashboard', 'DashboardController@index');
-    Route::get('/kas_masuk/{kas_masuk}/delete', 'KasMasukController@delete');
     Route::resource('/kas_masuk', 'KasMasukController');
     Route::resource('/kas_keluar', 'KasKeluarController');
 });

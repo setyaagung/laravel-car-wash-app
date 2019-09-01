@@ -59,6 +59,7 @@
     <script>
         $('.delete').click(function() {
            var kasmasuk_id = $(this).attr('id');
+           csrf_token = $('meta[name="csrf-token"]').attr('content');
            swal({
               title: "Yakin ?",
               text: "Ingin menghapus data kas masuk ini dengan id "+kasmasuk_id+" ??",
@@ -67,9 +68,29 @@
               dangerMode: true,
             })
             .then((willDelete) => {
-                console.log(willDelete);
                 if (willDelete) {
-                    window.location = "/kas_masuk/"+kasmasuk_id+"/delete";
+                    $.ajax({
+                        url : "/kas_masuk/"+kasmasuk_id,
+                        type : "POST",
+                        data : {
+                            '_method' : 'DELETE',
+                            '_token' : csrf_token,
+                        },
+                        success: function(response){
+                            toastr.error(
+                                'Data Kas Masuk Berhasil Dihapus!',
+                                'Terhapus',
+                                {
+                                    timeOut: 3000,
+                                    fadeOut: 3000,
+                                    onHidden: function () {
+                                        window.location.reload();
+                                    }
+                                }
+                                );
+                           
+                        }
+                    })
                 }
             });
         });

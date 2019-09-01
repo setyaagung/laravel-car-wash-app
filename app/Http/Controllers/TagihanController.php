@@ -26,7 +26,7 @@ class TagihanController extends Controller
         return redirect('/tagihan')->with('create', 'Data Berhasil Ditambahkan');
     }
 
-    public function edit(Shift $shift)
+    public function edit(Shift $tagihan)
     {
         return view('master/tagihan/edit', compact('tagihan'));
     }
@@ -41,9 +41,9 @@ class TagihanController extends Controller
         return redirect('/tagihan')->with('update', 'Data Berhasil diperbarui');
     }
 
-    public function delete(Tagihan $tagihan)
+    public function delete($id)
     {
-        Tagihan::destroy($tagihan->id);
+        Tagihan::where('id_tagihan', $id)->delete();
         return redirect('/tagihan')->with('delete', 'Data Berhasil Dihapus');
     }
 }

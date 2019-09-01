@@ -31,13 +31,13 @@
                                 @foreach($data_karyawan as $karyawan)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><a href="/karyawan/{{$karyawan->id}}/profile">{{$karyawan->nama}}</a></td>
+                                        <td><a href="/karyawan/{{$karyawan->id_karyawan}}/profile">{{$karyawan->nama}}</a></td>
                                         <td>{{$karyawan->job}}</td>
                                         <td>{{$karyawan->no_hp}}</td>
                                         <td>Rp. {{number_format($karyawan->gaji,0, ',' , '.')}}</td>
                                         <td>
-                                            <a href="/karyawan/{{$karyawan->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
-                                            <a href="#" class="btn btn-danger btn-sm delete" id="{{$karyawan->id}}">Delete</a>
+                                            <a href="/karyawan/{{$karyawan->id_karyawan}}/edit" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="#" class="btn btn-danger btn-sm delete" id="{{$karyawan->id_karyawan}}">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

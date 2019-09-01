@@ -15,7 +15,7 @@
 							<h3 class="panel-title">Edit Data Karyawan</h3>
 						</div>
 						<div class="panel-body">
-                            <form action="/karyawan/{{$karyawan->id}}/update" method="post" enctype="multipart/form-data">
+                            <form action="/karyawan/{{$karyawan->id_karyawan}}/update" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group @error('nama') has-error @enderror">
                                     <label><b>Nama Karyawan</b></label>

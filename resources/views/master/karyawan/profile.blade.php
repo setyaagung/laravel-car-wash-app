@@ -49,7 +49,7 @@
                                             <li>Gaji <span>Rp. {{number_format($karyawan->gaji,0, ',' , '.')}}</span></li>
                                         </ul>
 									</div>
-									<div class="text-center"><a href="/karyawan/{{$karyawan->id}}/edit" class="btn btn-warning">Edit Profile</a></div>
+									<div class="text-center"><a href="/karyawan/{{$karyawan->id_karyawan}}/edit" class="btn btn-warning">Edit Profile</a></div>
 								</div>
 								<!-- END PROFILE DETAIL -->
 							</div>
@@ -84,7 +84,7 @@
 														<td><span class="badge bg-success">Lunas</span></td>
 													@endif
 													<td>
-														<a href="#" class="btn btn-danger btn-sm delete" id="{{$tanggungan->id}}">Delete</a>
+														<a href="#" class="btn btn-danger btn-sm delete" id="{{$tanggungan->id_tanggungan}}">Delete</a>
 													</td>
 												</tr>
 											@endforeach
@@ -116,7 +116,7 @@
 															<td>{{$absensi->keterangan}}</td>
 															<td>Rp. {{number_format($absensi->denda,0, ',' , '.')}}</td>
 															<td>
-																<a href="#" class="btn btn-danger btn-sm delete" id="{{$tanggungan->id}}">Delete</a>
+																<a href="#" class="btn btn-danger btn-sm delete" id="{{$tanggungan->id_tanggungan}}">Delete</a>
 															</td>
 														</tr>
 													@endforeach
@@ -144,7 +144,7 @@
             <h5 class="modal-title">Tambah Tanggungan</h5>
         </div>
         <div class="modal-body">
-            <form action="/karyawan/{{$karyawan->id}}/addtanggungan" method="post" enctype="multipart/form-data">
+            <form action="/karyawan/{{$karyawan->id_karyawan}}/addtanggungan" method="post" enctype="multipart/form-data">
             @csrf
 				<div class="form-group @error('keterangan') has-error @enderror">
 					<label><b>Keterangan</b></label>
@@ -194,7 +194,7 @@
             <h5 class="modal-title">Tambah Absensi</h5>
         </div>
         <div class="modal-body">
-            <form action="/karyawan/{{$karyawan->id}}/addabsensi" method="post" enctype="multipart/form-data">
+            <form action="/karyawan/{{$karyawan->id_karyawan}}/addabsensi" method="post" enctype="multipart/form-data">
 			@csrf
 				<div class="form-group @error('jenis') has-error @enderror">
 					<label><b>Jenis</b></label>

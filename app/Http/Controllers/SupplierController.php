@@ -39,18 +39,13 @@ class SupplierController extends Controller
             'alamat' => 'required',
         ]);
         
-        Supplier::where('id', $layanan->id)
-        ->update([
-            'nama' => $request->nama,
-            'no_hp' => $request->no_hp,
-            'alamat' => $request->alamat
-        ]);
+        $supplier->update($request->all());
         return redirect('/supplier')->with('update', 'Data Berhasil diperbarui');
     }
 
-    public function delete(Supplier $supplier)
+    public function delete($id)
     {
-        Supplier::destroy($supplier->id);
-        return redirect('/supplier')->with('delete', 'Data Berhasil Dihapus');
+        Supplier::where('id_supplier', $id)->delete();
+        return redirect('/supplier')->with('delete', 'Data Supplier Berhasil Dihapus');
     }
 }

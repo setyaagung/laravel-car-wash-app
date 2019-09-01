@@ -29,7 +29,7 @@
                                     <label><b>User</b></label>
                                     <select class="form-control" name="user_id" id="user_id">
                                         @foreach($user as $u)
-                                            <option value="{{$u->id}}">{{$u->name}}</option>
+                                            <option value="{{$u->id_user}}">{{$u->name}}</option>
                                         @endforeach
                                     </select>
                                     @error('user'))
@@ -41,7 +41,7 @@
                                     <label><b>Shift</b></label>
                                     <select class="form-control" name="shift_id" id="shift_id">
                                         @foreach($shift as $s)
-                                            <option value="{{$s->id}}">{{$s->nama_shift}}</option>
+                                            <option value="{{$s->id_shift}}">{{$s->nama_shift}}</option>
                                         @endforeach
                                     </select>
                                     @error('shift_id'))
@@ -54,7 +54,7 @@
                                     <select class="form-control dinamis" name="layanan_id" id="layanan_id">
                                         <option value="">-- Pilih Layanan --</option>
                                         @foreach($layanan as $l)
-                                            <option value="{{$l->id}}">{{$l->nama}}</option>
+                                            <option value="{{$l->id_layanan}}">{{$l->nama}}</option>
                                         @endforeach
                                     </select>
                                     @error('layanan_id'))

@@ -96,9 +96,9 @@ class KasMasukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(KasMasuk $kasmasuk)
+    public function destroy($id)
     {
-        $kasmasuk = KasMasuk::destroy($kasmasuk->id_km);
+        KasMasuk::where('id_km', $id)->delete();
         return redirect('/kas_masuk')->with('delete', 'Data Kas Masuk Berhasil Dihapus');
     }
 }

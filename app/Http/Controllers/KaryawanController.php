@@ -102,9 +102,9 @@ class KaryawanController extends Controller
         return redirect('karyawan/'.$id_karyawan.'/profile')->with('create','Data Absensi Berhasil Ditambahkan');
     }
 
-    public function delete(Karyawan $karyawan)
+    public function delete($id)
     {
-        Karyawan::destroy($karyawan->id);
-        return redirect('/karyawan')->with('delete', 'Data Berhasil Dihapus');
+        Karyawan::where('id_karyawan', $id)->delete();
+        return redirect('/karyawan')->with('delete', 'Data Karyawan Berhasil Dihapus');
     }
 }

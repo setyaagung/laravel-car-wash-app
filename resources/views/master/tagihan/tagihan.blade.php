@@ -30,8 +30,8 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{$tagihan->kategori}}</td>
                                         <td>
-                                            <a href="/tagihan/{{$tagihan->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
-                                            <a href="#" class="btn btn-danger btn-sm delete" id="{{$tagihan->id}}">Delete</a>
+                                            <a href="/tagihan/{{$tagihan->id_tagihan}}/edit" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="#" class="btn btn-danger btn-sm delete" id="{{$tagihan->id_tagihan}}">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -82,7 +82,7 @@
            var tagihan_id = $(this).attr('id');
            swal({
               title: "Yakin ?",
-              text: "Ingin meenghapus data user ini dengan id "+tagihan_id+" ??",
+              text: "Ingin meenghapus data tagihan ini dengan id "+tagihan_id+" ??",
               icon: "warning",
               buttons: true,
               dangerMode: true,

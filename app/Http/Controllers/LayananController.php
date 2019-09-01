@@ -53,9 +53,9 @@ class LayananController extends Controller
         return redirect('/layanan')->with('update', 'Data Berhasil diperbarui');
     }
 
-    public function delete(Layanan $layanan)
+    public function delete($id)
     {
-        Layanan::destroy($layanan->id_layanan);
+        Layanan::where('id_layanan', $id)->delete();
         return redirect('/layanan')->with('delete', 'Data Berhasil Dihapus');
     }
 }

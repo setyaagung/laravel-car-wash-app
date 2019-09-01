@@ -34,8 +34,8 @@
                                         <td>{{$shift->mulai}}</td>
                                         <td>{{$shift->selesai}}</td>
                                         <td>
-                                            <a href="/shift/{{$shift->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
-                                            <a href="#" class="btn btn-danger btn-sm delete" id="{{$shift->id}}">Delete</a>
+                                            <a href="/shift/{{$shift->id_shift}}/edit" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="#" class="btn btn-danger btn-sm delete" id="{{$shift->id_shift}}">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -102,7 +102,7 @@
            var shift_id = $(this).attr('id');
            swal({
               title: "Yakin ?",
-              text: "Ingin meenghapus data shift ini dengan id "+shift_id+" ??",
+              text: "Ingin menghapus data shift ini dengan id "+shift_id+" ??",
               icon: "warning",
               buttons: true,
               dangerMode: true,

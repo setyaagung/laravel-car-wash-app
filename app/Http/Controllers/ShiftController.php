@@ -22,11 +22,7 @@ class ShiftController extends Controller
             'selesai' => 'required',
         ]);
 
-        Shift::create([
-            'nama_shift' => $request->nama_shift,
-            'mulai' => $request->mulai,
-            'selesai' => $request->selesai,
-        ]);
+       $shift = Shift::create($request->all());
         return redirect('/shift')->with('create', 'Data Berhasil Ditambahkan');
     }
 
@@ -43,18 +39,13 @@ class ShiftController extends Controller
             'selesai' => 'required',
         ]);
 
-        Shift::where('id', $shift->id)
-        ->update([
-            'nama_shift' => $request->nama_shift,
-            'mulai' => $request->mulai,
-            'selesai' => $request->selesai,
-        ]);
+        $shift->update($request->all());
         return redirect('/shift')->with('update', 'Data Berhasil diperbarui');
     }
 
-    public function delete(Shift $shift)
+    public function delete($id)
     {
-        Shift::destroy($shift->id);
+        Shift::where('id_shift', $id)->delete();
         return redirect('/shift')->with('delete', 'Data Berhasil Dihapus');
     }
 }
