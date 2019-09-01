@@ -30,16 +30,18 @@
 									</tr>
 								</thead>
 								<tbody>
-                                    @foreach ($kas_masuk as $index)
+                                    @foreach ($kasmasuk as $km)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{date('d M Y', strtotime($index->tanggal))}}</td>
-                                            <td>{{$index->nama_shift}}</td>
-                                            <td>{{$index->nama}}</td>
-                                            <td>Rp. {{number_format($index->harga,0, ',' , '.')}}</td>
-                                            <td>{{$index->jumlah}}</td>
-                                            <td>Rp. {{number_format($index->total,0, ',' , '.')}}</td>
-                                            <td>#</td>
+                                            <td>{{date('d M Y', strtotime($km->tanggal))}}</td>
+                                            <td>{{$km->nama_shift}}</td>
+                                            <td>{{$km->nama}}</td>
+                                            <td>Rp. {{number_format($km->harga,0, ',' , '.')}}</td>
+                                            <td>{{$km->jumlah}}</td>
+                                            <td>Rp. {{number_format($km->total,0, ',' , '.')}}</td>
+                                            <td>
+                                               <a href="#" class="btn btn-danger btn-sm delete" id="{{$km->id_km}}">Delete</a>
+                                            </td>
                                         </tr>
                                     @endforeach
 								</tbody>
@@ -56,10 +58,10 @@
 @section('footer')
     <script>
         $('.delete').click(function() {
-           var layanan_id = $(this).attr('id');
+           var kasmasuk_id = $(this).attr('id');
            swal({
               title: "Yakin ?",
-              text: "Ingin meenghapus data layanan ini dengan id "+layanan_id+" ??",
+              text: "Ingin menghapus data kas masuk ini dengan id "+kasmasuk_id+" ??",
               icon: "warning",
               buttons: true,
               dangerMode: true,
@@ -67,7 +69,7 @@
             .then((willDelete) => {
                 console.log(willDelete);
                 if (willDelete) {
-                    window.location = "/layanan/"+layanan_id+"/delete";
+                    window.location = "/kas_masuk/"+kasmasuk_id+"/delete";
                 }
             });
         });

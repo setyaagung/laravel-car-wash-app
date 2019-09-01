@@ -79,10 +79,10 @@
 @section('footer')
     <script>
         $('.delete').click(function() {
-           var user_id = $(this).attr('id');
+           var tagihan_id = $(this).attr('id');
            swal({
               title: "Yakin ?",
-              text: "Ingin meenghapus data user ini dengan id "+user_id+" ??",
+              text: "Ingin meenghapus data user ini dengan id "+tagihan_id+" ??",
               icon: "warning",
               buttons: true,
               dangerMode: true,
@@ -90,7 +90,7 @@
             .then((willDelete) => {
                 console.log(willDelete);
                 if (willDelete) {
-                    window.location = "/user/"+user_id+"/delete";
+                    window.location = "/tagihan/"+tagihan_id+"/delete";
                 }
             });
         });

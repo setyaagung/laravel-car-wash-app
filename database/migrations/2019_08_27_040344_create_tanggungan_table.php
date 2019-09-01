@@ -14,7 +14,7 @@ class CreateTanggunganTable extends Migration
     public function up()
     {
         Schema::create('tanggungan', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_tanggungan');
             $table->integer('karyawan_id');
             $table->string('keterangan');
             $table->integer('jumlah');

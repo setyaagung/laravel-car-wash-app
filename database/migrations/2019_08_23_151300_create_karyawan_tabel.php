@@ -14,13 +14,14 @@ class CreateKaryawanTabel extends Migration
     public function up()
     {
         Schema::create('karyawan', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_karyawan');
             $table->string('nama');
             $table->string('jenis_kelamin');
             $table->string('job');
             $table->text('alamat');
             $table->string('no_hp');
             $table->integer('gaji');
+            $table->string('avatar');
             $table->timestamps();
         });
     }

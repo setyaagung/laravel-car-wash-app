@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class KasMasuk extends Model
 {
     protected $table = 'kas_masuks';
-    protected $fillable = ['tanggal','user_id', 'shift_id', 'layanan_id','harga', 'jumlah', 'total'];
+    protected $fillable = ['id_km','tanggal','user_id', 'shift_id', 'layanan_id','harga', 'jumlah', 'total'];
 
     public static function join()
     {
@@ -16,7 +16,6 @@ class KasMasuk extends Model
                 ->join('users as b','a.user_id', '=', 'b.id')
                 ->join('shift as c','a.shift_id', '=', 'c.id')
                 ->join('layanan as d','a.layanan_id', '=', 'd.id')
-                ->select('a.*','b.*', 'c.*', 'd.*')
                 ->get();
                 return $data;
     }

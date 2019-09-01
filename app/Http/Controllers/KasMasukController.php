@@ -18,8 +18,8 @@ class KasMasukController extends Controller
      */
     public function index()
     {
-        $kas_masuk = KasMasuk::join();
-        return view('kas/kasmasuk/kas_masuk', compact('kas_masuk'));
+        $kasmasuk = KasMasuk::join();
+        return view('kas/kasmasuk/kas_masuk', compact('kasmasuk'));
     }
 
     /**
@@ -96,8 +96,9 @@ class KasMasukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(KasMasuk $kasmasuk)
     {
-        //
+        $kasmasuk = KasMasuk::destroy($kasmasuk->id_km);
+        return redirect('/kas_masuk')->with('delete', 'Data Kas Masuk Berhasil Dihapus');
     }
 }

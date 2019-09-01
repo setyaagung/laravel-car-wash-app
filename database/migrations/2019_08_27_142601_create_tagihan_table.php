@@ -14,10 +14,8 @@ class CreateTagihanTable extends Migration
     public function up()
     {
         Schema::create('Tagihan', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_tagihan');
             $table->string('kategori');
-            $table->string('deskripsi');
-            $table->integer('jumlah');
             $table->timestamps();
             $table->softDeletes();
         });

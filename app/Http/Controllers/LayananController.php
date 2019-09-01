@@ -44,7 +44,7 @@ class LayananController extends Controller
             'harga' => 'required',
         ]);
         
-        Layanan::where('id', $layanan->id)
+        Layanan::where('id_layanan', $layanan->id_layanan)
         ->update([
             'kategori' => $request->kategori,
             'nama' => $request->nama,
@@ -55,7 +55,7 @@ class LayananController extends Controller
 
     public function delete(Layanan $layanan)
     {
-        Layanan::destroy($layanan->id);
+        Layanan::destroy($layanan->id_layanan);
         return redirect('/layanan')->with('delete', 'Data Berhasil Dihapus');
     }
 }

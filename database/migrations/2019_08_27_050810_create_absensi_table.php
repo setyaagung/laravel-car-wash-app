@@ -14,7 +14,7 @@ class CreateAbsensiTable extends Migration
     public function up()
     {
         Schema::create('Absensi', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id_absensi');
             $table->integer('karyawan_id');
             $table->enum('jenis',['Sakit', 'Izin', 'Alfa']);
             $table->text('keterangan');

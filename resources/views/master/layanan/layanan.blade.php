@@ -34,8 +34,8 @@
                                         <td>{{$layanan->nama}}</td>
                                         <td>Rp. {{number_format($layanan->harga,0, ',' , '.')}}</td>
                                         <td>
-                                            <a href="/layanan/{{$layanan->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
-                                            <a href="#" class="btn btn-danger btn-sm delete" id="{{$layanan->id}}">Delete</a>
+                                            <a href="layanan/{{$layanan->id_layanan}}/edit" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="#" class="btn btn-danger btn-sm delete" id="{{ $layanan->id_layanan }}">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -97,10 +97,10 @@
 @section('footer')
     <script>
         $('.delete').click(function() {
-           var layanan_id = $(this).attr('id');
+           var id_layanan = $(this).attr('id_layanan');
            swal({
               title: "Yakin ?",
-              text: "Ingin meenghapus data layanan ini dengan id "+layanan_id+" ??",
+              text: "Ingin menghapus data layanan ini dengan id "+id_layanan+" ??",
               icon: "warning",
               buttons: true,
               dangerMode: true,
@@ -108,7 +108,7 @@
             .then((willDelete) => {
                 console.log(willDelete);
                 if (willDelete) {
-                    window.location = "/layanan/"+layanan_id+"/delete";
+                    window.location = "/layanan/"+id_layanan+"/delete";
                 }
             });
         });
