@@ -19,13 +19,13 @@ class LayananController extends Controller
         //validasi
     	$this->validate($request, [
             'kategori' => 'required',
-            'nama' => 'required|min:3',
+            'nama_layanan' => 'required|min:3',
             'harga' => 'required',
         ]);
 
         Layanan::create([
             'kategori' => $request->kategori,
-            'nama' => $request->nama,
+            'nama_layanan' => $request->nama_layanan,
             'harga' => $request->harga
         ]);
         return redirect('/layanan')->with('create', 'Data Berhasil Ditambahkan');
@@ -40,14 +40,14 @@ class LayananController extends Controller
     {
         $this->validate($request, [
             'kategori' => 'required',
-            'nama' => 'required|min:3',
+            'nama_layanan' => 'required|min:3',
             'harga' => 'required',
         ]);
         
         Layanan::where('id_layanan', $layanan->id_layanan)
         ->update([
             'kategori' => $request->kategori,
-            'nama' => $request->nama,
+            'nama_layanan' => $request->nama_layanan,
             'harga' => $request->harga
         ]);
         return redirect('/layanan')->with('update', 'Data Berhasil diperbarui');

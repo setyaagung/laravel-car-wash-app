@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\KasKeluar;
+use App\User;
+use App\Tagihan;
+use App\Shift;
 
 class KasKeluarController extends Controller
 {
@@ -13,7 +17,8 @@ class KasKeluarController extends Controller
      */
     public function index()
     {
-        //
+        $kaskeluar = KasKeluar::join();
+        return view('kas/kaskeluar/kas_keluar', compact('kaskeluar'));
     }
 
     /**
@@ -23,7 +28,10 @@ class KasKeluarController extends Controller
      */
     public function create()
     {
-        //
+        $user = User::all();
+        $tagihan = Tagihan::all();
+        $shift = Shift::all();
+        return view('kas/kaskeluar/create', compact('user','tagihan','shift'));
     }
 
     /**
@@ -34,7 +42,18 @@ class KasKeluarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'tanggal' => 'required',
+            'user_id' => 'required',
+            'shift_id' => 'required',
+            'tagihan_id' => 'required',
+            'jumlah' => 'required',
+            'ket' => 'required',
+        ]);
+        $kaskeluar = KasKeluar::create($request->all());
+        $kaskeluar->save();
+
+        return redirect('/kas_keluar')->with('create', 'Data Kas Keluar Berhasil diinputkan');
     }
 
     /**
@@ -79,6 +98,7 @@ class KasKeluarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        KasKeluar::where('id_kk', $id)->delete();
+        return redirect('/kas_keluar')->with('delete', 'Data Kas Keluar Berhasil Dihapus');
     }
 }

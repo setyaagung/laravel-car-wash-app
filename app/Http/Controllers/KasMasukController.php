@@ -7,7 +7,6 @@ use App\KasMasuk;
 use App\User;
 use App\Layanan;
 use App\Shift;
-use DB;
 
 class KasMasukController extends Controller
 {

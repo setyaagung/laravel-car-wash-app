@@ -9,5 +9,5 @@ class Tagihan extends Model
 {
     use SoftDeletes;
     protected $table = 'tagihan';
-    protected $fillable = ['kategori'];
+    protected $fillable = ['kategori','keterangan'];
 }

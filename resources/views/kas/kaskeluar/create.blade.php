@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Tambah Kas Masuk')
+@section('title', 'Tambah Kas Keluar')
 
 @section('content')
 
@@ -8,14 +8,14 @@
     <div class="main-content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <!-- INPUTS -->
 					<div class="panel">
 						<div class="panel-heading">
-							<h3 class="panel-title">Tambah Kas Masuk</h3>
+							<h3 class="panel-title">Tambah Kas Keluar</h3>
 						</div>
 						<div class="panel-body">
-                            <form action="{{route('kas_masuk.store')}}" method="POST">
+                            <form action="{{route('kas_keluar.store')}}" method="POST">
                             {{ csrf_field() }}
                             <div class="form-group @error('tanggal') has-error @enderror">
                                 <label><b>Tanggal</b></label>
@@ -49,39 +49,31 @@
                                     @enderror
                                 </div>
                         
-                                <div class="form-group @error('layanan_id') has-error @enderror">
-                                    <label><b>Layanan</b></label>
-                                    <select class="form-control dinamis" name="layanan_id" id="layanan_id">
-                                        <option value="">-- Pilih Layanan --</option>
-                                        @foreach($layanan as $l)
-                                            <option value="{{$l->id_layanan}}">{{$l->nama_layanan}}</option>
+                                <div class="form-group @error('tagihan_id') has-error @enderror">
+                                    <label><b>Tagihan</b></label>
+                                    <select class="form-control" name="tagihan_id" id="tagihan_id">
+                                        <option value="">-- Pilih Tagihan --</option>
+                                        @foreach($tagihan as $t)
+                                            <option value="{{$t->id_tagihan}}">{{$t->kategori}}</option>
                                         @endforeach
                                     </select>
-                                    @error('layanan_id'))
-                                        <span class="help-block">{{ $message }}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group @error('harga') has-error @enderror">
-                                    <label><b>Harga</b></label>
-                                    <input type="number" step="any" min="0" class="form-control" name="harga" id="harga" placeholder="Harga" value="{{ old('harga') }}">
-                                    @error('harga')
+                                    @error('tagihan_id'))
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>
     
                                 <div class="form-group @error('jumlah') has-error @enderror">
                                     <label><b>Jumlah</b></label>
-                                    <input type="number" step="any" min="0" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" value="{{ old('jumlah') }}">
+                                    <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" value="{{ old('jumlah') }}">
                                     @error('jumlah')
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                
-                                <div class="form-group @error('total') has-error @enderror">
-                                    <label><b>Total</b></label>
-                                    <input type="number" class="form-control" name="total" id="total" placeholder="Total" readonly value="{{ old('total') }}">
-                                    @error('total')
+
+                                <div class="form-group @error('ket') has-error @enderror">
+                                    <label><b>Keterangan</b></label>
+                                    <textarea class="form-control" name="ket" id="ket" rows="3">{{old('ket')}}</textarea>
+                                    @error('ket')
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -96,27 +88,25 @@
 					<!-- END INPUTS -->
                 </div>
 
-                <div class="col-md-7">
+                <div class="col-md-6">
                     <!-- INPUTS -->
 					<div class="panel">
 						<div class="panel-heading">
-							<h3 class="panel-title">Data Layanan</h3>
+							<h3 class="panel-title">Data Tagihan</h3>
 						</div>
 						<div class="panel-body">
                             <table class="table table-hover" id="myTable">
                                 <thead>
                                     <tr>
                                         <th>KATEGORI</th>
-                                        <th>NAMA</th>
-                                        <th>HARGA</th>
+                                        <th>KETERANGAN</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($layanan as $item)
+                                @foreach ($tagihan as $item)
                                 <tr>
                                     <td>{{$item->kategori}}</td>
-                                    <td>{{$item->nama}}</td>
-                                    <td>Rp. {{number_format($item->harga,0, ',' , '.')}}</td>
+                                    <td>{{$item->keterangan}}</td>
                                 </tr>
                                 @endforeach 
                                 </tbody>
@@ -130,19 +120,4 @@
     </div>
 </div>
 
-@endsection
-
-@section('footer')
-    <script type="text/javascript">
-        $("#jumlah").keyup(function(){
-            total = $("#jumlah").val()* $("#harga").val();
-        $("#total").val(total);
-        });
-
-       $("#harga").keyup(function(){
-            total = $("#jumlah").val()* $("#harga").val();
-        $("#total").val(total);
-        });
-
-    </script>
 @endsection

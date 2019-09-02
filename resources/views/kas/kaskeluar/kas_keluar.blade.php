@@ -1,6 +1,6 @@
 @extends('layout/main')
 
-@section('title', 'Data Kas Masuk')
+@section('title', 'Data Kas Keluar')
 
 @section('content')
 <div class="main">
@@ -10,9 +10,9 @@
                 <div class="col-md-12">
                     <div class="panel">
 						<div class="panel-heading">
-						    <h3 class="panel-title">Data Kas Masuk</h3>
+						    <h3 class="panel-title">Data Kas Keluar</h3>
                             <div class="right">
-                                <a href="/kas_masuk/create" class="btn btn-primary btn-sm"><i class="lnr lnr-plus-circle"></i> Tambah Kas Masuk</a>  
+                                <a href="/kas_keluar/create" class="btn btn-primary btn-sm"><i class="lnr lnr-plus-circle"></i> Tambah Kas Keluar</a>  
                             </div>
 						</div>
 						<div class="panel-body">
@@ -22,25 +22,23 @@
                                         <th>NO</th>
                                         <th>TANGGAL</th>
                                         <th>SHIFT</th>
-                                        <th>LAYANAN</th>
-                                        <th>HARGA</th>
+                                        <th>TAGIHAN</th>
                                         <th>JUMLAH</th>
-                                        <th>TOTAL</th>
+                                        <th>KETERANGAN</th>
                                         <th>AKSI</th>
 									</tr>
 								</thead>
 								<tbody>
-                                    @foreach ($kasmasuk as $km)
+                                    @foreach ($kaskeluar as $kk)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{date('d M Y', strtotime($km->tanggal))}}</td>
-                                            <td>{{$km->nama_shift}}</td>
-                                            <td>{{$km->nama_layanan}}</td>
-                                            <td>Rp. {{number_format($km->harga,0, ',' , '.')}}</td>
-                                            <td>{{$km->jumlah}}</td>
-                                            <td>Rp. {{number_format($km->total,0, ',' , '.')}}</td>
+                                            <td>{{date('d M Y', strtotime($kk->tanggal))}}</td>
+                                            <td>{{$kk->nama_shift}}</td>
+                                            <td>{{$kk->kategori}}</td>
+                                            <td>Rp. {{number_format($kk->jumlah,0, ',' , '.')}}</td>
+                                            <td>{{$kk->ket}}</td>
                                             <td>
-                                               <a href="#" class="btn btn-danger btn-sm delete" id="{{$km->id_km}}">Delete</a>
+                                               <a href="#" class="btn btn-danger btn-sm delete" id="{{$kk->id_kk}}">Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -58,11 +56,11 @@
 @section('footer')
     <script>
         $('.delete').click(function() {
-           var kasmasuk_id = $(this).attr('id');
+           var kaskeluar_id = $(this).attr('id');
            csrf_token = $('meta[name="csrf-token"]').attr('content');
            swal({
               title: "Yakin ?",
-              text: "Ingin menghapus data kas masuk ini dengan id "+kasmasuk_id+" ??",
+              text: "Ingin menghapus data kas keluar ini dengan id "+kaskeluar_id+" ??",
               icon: "warning",
               buttons: true,
               dangerMode: true,
@@ -70,7 +68,7 @@
             .then((willDelete) => {
                 if (willDelete) {
                     $.ajax({
-                        url : "/kas_masuk/"+kasmasuk_id,
+                        url : "/kas_keluar/"+kaskeluar_id,
                         type : "POST",
                         data : {
                             '_method' : 'DELETE',
@@ -78,7 +76,7 @@
                         },
                         success: function(response){
                             toastr.error(
-                                'Data Kas Masuk Berhasil Dihapus!',
+                                'Data Kas Keluar Berhasil Dihapus!',
                                 'Terhapus',
                                 {
                                     timeOut: 1500,

@@ -24,10 +24,10 @@
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="form-group @error('nama') has-error @enderror">
+                                <div class="form-group @error('nama_layanan') has-error @enderror">
                                     <label><b>Nama Layanan</b></label>
-                                    <input type="text" class="form-control" name="nama" placeholder="Nama Layanan" value="{{$layanan->nama}}">
-                                    @error('nama')
+                                    <input type="text" class="form-control" name="nama_layanan" placeholder="Nama Layanan" value="{{$layanan->nama_layanan}}">
+                                    @error('nama_layanan')
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>

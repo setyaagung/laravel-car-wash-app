@@ -31,7 +31,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{$layanan->kategori}}</td>
-                                        <td>{{$layanan->nama}}</td>
+                                        <td>{{$layanan->nama_layanan}}</td>
                                         <td>Rp. {{number_format($layanan->harga,0, ',' , '.')}}</td>
                                         <td>
                                             <a href="layanan/{{$layanan->id_layanan}}/edit" class="btn btn-warning btn-sm">Edit</a>
@@ -69,10 +69,10 @@
                             <span class="help-block">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="form-group @error('nama') has-error @enderror">
+                    <div class="form-group @error('nama_layanan') has-error @enderror">
                         <label><b>Nama Layanan</b></label>
-                        <input type="text" class="form-control" name="nama" placeholder="Nama Layanan" value="{{old('nama')}}">
-                        @error('nama')
+                        <input type="text" class="form-control" name="nama_layanan" placeholder="Nama Layanan" value="{{old('nama_layanan')}}">
+                        @error('nama_layanan')
                             <span class="help-block">{{ $message }}</span>
                         @enderror
                     </div>

@@ -30,7 +30,7 @@
 						<div id="subKas" class="collapse ">
 							<ul class="nav">
 								<li><a href="/kas_masuk" class="">Kas Masuk</a></li>
-								<li><a href="#" class="">Kas Keluar</a></li>
+								<li><a href="/kas_keluar" class="">Kas Keluar</a></li>
 							</ul>
 						</div>
 				</li>

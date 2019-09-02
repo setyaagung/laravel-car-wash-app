@@ -18,10 +18,12 @@ class TagihanController extends Controller
         //validasi
     	$this->validate($request, [
             'kategori' => 'required',
+            'keterangan' => 'required'
         ]);
 
         Tagihan::create([
             'kategori' => $request->kategori,
+            'keterangan' => $request->keterangan
         ]);
         return redirect('/tagihan')->with('create', 'Data Berhasil Ditambahkan');
     }
@@ -35,6 +37,7 @@ class TagihanController extends Controller
     {
         $this->validate($request, [
             'kategori' => 'required',
+            'keterangan' => 'required'
         ]);
 
         $tagihan->update($request->all());

@@ -21,6 +21,7 @@
 									<tr>
                                         <th>NO</th>
                                         <th>KATEGORI</th>
+                                        <th>KETERANGAN</th>
                                         <th>AKSI</th>
 									</tr>
 								</thead>
@@ -29,6 +30,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{$tagihan->kategori}}</td>
+                                        <td>{{$tagihan->keterangan}}</td>
                                         <td>
                                             <a href="/tagihan/{{$tagihan->id_tagihan}}/edit" class="btn btn-warning btn-sm">Edit</a>
                                             <a href="#" class="btn btn-danger btn-sm delete" id="{{$tagihan->id_tagihan}}">Delete</a>
@@ -62,6 +64,14 @@
                         <label><b>Kategori</b></label>
                         <input type="text" class="form-control" name="kategori" placeholder="Kategori" value="{{old('kategori')}}">
                         @error('kategori')
+                            <span class="help-block">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group @error('keterangan') has-error @enderror">
+                        <label><b>Keterangan</b></label>
+                        <textarea name="keterangan" id="keterangan" class="form-control" rows="3">{{old('keterangan')}}</textarea>
+                        @error('keterangan')
                             <span class="help-block">{{ $message }}</span>
                         @enderror
                     </div>
