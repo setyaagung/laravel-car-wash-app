@@ -32,7 +32,7 @@
                                             <option value="{{$u->id_user}}">{{$u->name}}</option>
                                         @endforeach
                                     </select>
-                                    @error('user_id'))
+                                    @error('user_id')
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -44,7 +44,7 @@
                                             <option value="{{$s->id_shift}}">{{$s->nama_shift}}</option>
                                         @endforeach
                                     </select>
-                                    @error('shift_id'))
+                                    @error('shift_id')
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -57,7 +57,7 @@
                                             <option value="{{$l->id_layanan}}">{{$l->nama_layanan}}</option>
                                         @endforeach
                                     </select>
-                                    @error('layanan_id'))
+                                    @error('layanan_id')
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
                                 </div>

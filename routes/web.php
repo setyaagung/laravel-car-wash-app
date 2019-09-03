@@ -74,4 +74,8 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']],function()
     Route::get('/dashboard', 'DashboardController@index');
     Route::resource('/kas_masuk', 'KasMasukController');
     Route::resource('/kas_keluar', 'KasKeluarController');
+    Route::resource('/laporan_kas_masuk','LaporanKasMasukController');
+    Route::resource('/laporan_kas_keluar','LaporanKasKeluarController');
+    Route::get('/cari-laporan-km', 'LaporanKasMasukController@cari');
+    Route::get('/pdf-km/{dari}/{sampai}/{shift_id}', 'LaporanKasMasukController@pdf');
 });
