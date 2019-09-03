@@ -28,7 +28,7 @@ class TagihanController extends Controller
         return redirect('/tagihan')->with('create', 'Data Berhasil Ditambahkan');
     }
 
-    public function edit(Shift $tagihan)
+    public function edit(Tagihan $tagihan)
     {
         return view('master/tagihan/edit', compact('tagihan'));
     }

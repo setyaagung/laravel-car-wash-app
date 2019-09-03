@@ -16,6 +16,8 @@
 							</ul>
 						</div>
 				</li>
+				@endif
+				@if (auth()->user()->role == 'kasir')
 				<li>
 					<a href="#subTransaksi" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cart"></i> <span>Transaksi</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 						<div id="subTransaksi" class="collapse ">
@@ -34,12 +36,14 @@
 							</ul>
 						</div>
 				</li>
+				@endif
+				@if (auth()->user()->role == 'admin')
 				<li>
 					<a href="#subLaporan" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Laporan</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 						<div id="subLaporan" class="collapse ">
 							<ul class="nav">
-								<li><a href="/laporan_kas_masuk" class="">Laporan Kas Masuk</a></li>
-								<li><a href="/laporan_kas_keluar" class="">Laporan Kas Keluar</a></li>
+								<li><a href="/laporan_kas_masuk" class="">Kas Masuk</a></li>
+								<li><a href="/laporan_kas_keluar" class="">Kas Keluar</a></li>
 							</ul>
 						</div>
 				</li>

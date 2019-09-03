@@ -78,4 +78,6 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']],function()
     Route::resource('/laporan_kas_keluar','LaporanKasKeluarController');
     Route::get('/cari-laporan-km', 'LaporanKasMasukController@cari');
     Route::get('/pdf-km/{dari}/{sampai}/{shift_id}', 'LaporanKasMasukController@pdf');
+    Route::get('/cari-laporan-kk', 'LaporanKasKeluarController@cari');
+    Route::get('/pdf-kk/{dari}/{sampai}/{tagihan_id}', 'LaporanKasKeluarController@pdf');
 });
