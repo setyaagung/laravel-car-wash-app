@@ -56,8 +56,13 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']],function()
     Route::post('/tagihan/{tagihan}/update', 'TagihanController@update');
     Route::get('/tagihan/{tagihan}/delete', 'TagihanController@delete');
 
-    //Penjualan
-    
+    //laporan
+    Route::resource('/laporan_kas_masuk','LaporanKasMasukController');
+    Route::resource('/laporan_kas_keluar','LaporanKasKeluarController');
+    Route::get('/cari-laporan-km', 'LaporanKasMasukController@cari');
+    Route::get('/pdf-km/{dari}/{sampai}/{shift_id}', 'LaporanKasMasukController@pdf');
+    Route::get('/cari-laporan-kk', 'LaporanKasKeluarController@cari');
+    Route::get('/pdf-kk/{dari}/{sampai}/{tagihan_id}', 'LaporanKasKeluarController@pdf');
 
     //User
     Route::get('/user', 'UserController@index');
@@ -74,10 +79,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']],function()
     Route::get('/dashboard', 'DashboardController@index');
     Route::resource('/kas_masuk', 'KasMasukController');
     Route::resource('/kas_keluar', 'KasKeluarController');
-    Route::resource('/laporan_kas_masuk','LaporanKasMasukController');
-    Route::resource('/laporan_kas_keluar','LaporanKasKeluarController');
-    Route::get('/cari-laporan-km', 'LaporanKasMasukController@cari');
-    Route::get('/pdf-km/{dari}/{sampai}/{shift_id}', 'LaporanKasMasukController@pdf');
-    Route::get('/cari-laporan-kk', 'LaporanKasKeluarController@cari');
-    Route::get('/pdf-kk/{dari}/{sampai}/{tagihan_id}', 'LaporanKasKeluarController@pdf');
+    Route::get('/penjualan/save', 'PenjualanController@save')->name('penjualan.save');
+    Route::resource('/penjualan', 'PenjualanController');
+    
 });

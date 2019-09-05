@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PDF;
 
 class LaporanKasKeluarController extends Controller
 {
@@ -60,14 +61,14 @@ class LaporanKasKeluarController extends Controller
                                     $sampai])->sum('jumlah');
         }
         else{
-            $kasmasuk = \DB::table('kas_keluar')
+            $kaskeluar = \DB::table('kas_keluar')
                         ->join('users','kas_keluar.user_id', '=', 'users.id_user')
                         ->join('shift','kas_keluar.shift_id', '=', 'shift.id_shift')
                         ->join('tagihan','kas_keluar.tagihan_id', '=', 'tagihan.id_tagihan')
                         ->where('shift_id',$shift_id)->whereBetween('tanggal',[$dari,
                                     $sampai])->get();
 
-            $totalkasmasuk = \DB::table('kas_masuk')
+            $totalkaskeluar = \DB::table('kas_keluar')
                         ->join('users','kas_keluar.user_id', '=', 'users.id_user')
                         ->join('shift','kas_keluar.shift_id', '=', 'shift.id_shift')
                         ->join('tagihan','kas_keluar.tagihan_id', '=', 'tagihan.id_tagihan')
@@ -93,22 +94,22 @@ class LaporanKasKeluarController extends Controller
                         ->join('shift','kas_keluar.shift_id', '=', 'shift.id_shift')
                         ->join('tagihan','kas_keluar.tagihan_id', '=', 'tagihan.id_tagihan')
                         ->whereBetween('tanggal',[$dari,
-                                    $sampai])->sum('total');
+                                    $sampai])->sum('jumlah');
         }
         else{
-            $kasmasuk = \DB::table('kas_keluar')
+            $kaskeluar = \DB::table('kas_keluar')
                         ->join('users','kas_keluar.user_id', '=', 'users.id_user')
                         ->join('shift','kas_keluar.shift_id', '=', 'shift.id_shift')
                         ->join('tagihan','kas_keluar.tagihan_id', '=', 'tagihan.id_tagihan')
                         ->where('shift_id',$shift_id)->whereBetween('tanggal',[$dari,
                                     $sampai])->get();
 
-            $totalkasmasuk = \DB::table('kas_masuk')
+            $totalkaskeluar = \DB::table('kas_keluar')
                         ->join('users','kas_keluar.user_id', '=', 'users.id_user')
                         ->join('shift','kas_keluar.shift_id', '=', 'shift.id_shift')
                         ->join('tagihan','kas_keluar.tagihan_id', '=', 'tagihan.id_tagihan')
                         ->where('shift_id',$shift_id)->whereBetween('tanggal',[$dari,
-                                    $sampai])->sum('total');
+                                    $sampai])->sum('jumlah');
         }
         $pdf = PDF::loadView('export.kas-keluar', compact('kaskeluar','totalkaskeluar'));
         return $pdf->download('kas-keluar.pdf');

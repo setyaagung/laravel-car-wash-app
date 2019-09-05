@@ -12,4 +12,9 @@ class Layanan extends Model
     protected $fillable = ['kategori', 'nama_layanan', 'harga'];
     use SoftDeletes;
 
+    public function penjualan()
+    {
+        return $this->belongsTo(Penjualan::class);
+    }
+
 }

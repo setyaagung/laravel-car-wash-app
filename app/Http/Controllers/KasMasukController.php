@@ -42,15 +42,17 @@ class KasMasukController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new KasMasuk();
-        $data->tanggal = $request->tanggal;
-        $data->user_id = $request->user_id;
-        $data->shift_id = $request->shift_id;
-        $data->layanan_id = $request->layanan_id;
-        $data->harga = $request->harga;
-        $data->jumlah = $request->jumlah;
-        $data->total = $request->total;
-        $data->save();
+        $this->validate($request, [
+            'tanggal' => 'required',
+            'user_id' => 'required',
+            'shift_id' => 'required',
+            'layanan_id' => 'required',
+            'harga' => 'required',
+            'jumlah' => 'required',
+            'total' => 'required',
+        ]);
+
+        $kasmasuk = KasMasuk::create($request->all());
 
         return redirect('/kas_masuk')->with('create', 'Data Kas Masuk Berhasil diinputkan');
     }

@@ -22,7 +22,7 @@
 					<a href="#subTransaksi" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cart"></i> <span>Transaksi</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 						<div id="subTransaksi" class="collapse ">
 							<ul class="nav">
-								<li><a href="#" class="">Penjualan</a></li>
+								<li><a href="/penjualan" class="">Penjualan</a></li>
 								<li><a href="#" class="">Pembelian</a></li>
 							</ul>
 						</div>

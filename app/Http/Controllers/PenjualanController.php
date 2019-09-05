@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\KasKeluar;
-use App\User;
-use App\Tagihan;
-use App\Shift;
 
-class KasKeluarController extends Controller
+class PenjualanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +13,8 @@ class KasKeluarController extends Controller
      */
     public function index()
     {
-        $kaskeluar = KasKeluar::join();
-        return view('kas/kaskeluar/kas_keluar', compact('kaskeluar'));
+        $penjualan = \App\Penjualan::join();
+        return view('transaksi.penjualan.index', compact('penjualan'));
     }
 
     /**
@@ -28,10 +24,11 @@ class KasKeluarController extends Controller
      */
     public function create()
     {
-        $user = User::all();
-        $tagihan = Tagihan::all();
-        $shift = Shift::all();
-        return view('kas/kaskeluar/create', compact('user','tagihan','shift'));
+        $penjualan = \App\Penjualan::join()->where('status','0');
+        $user = \App\User::all();
+        $layanan = \App\Layanan::all();
+        $shift = \App\Shift::all();
+        return view('transaksi/penjualan/create', compact('penjualan','user','layanan','shift'));
     }
 
     /**
@@ -46,13 +43,12 @@ class KasKeluarController extends Controller
             'tanggal' => 'required',
             'user_id' => 'required',
             'shift_id' => 'required',
-            'tagihan_id' => 'required',
-            'jumlah' => 'required',
-            'ket' => 'required',
+            'layanan_id' => 'required',
+            'jumlah' => 'required'
         ]);
-        $kaskeluar = KasKeluar::create($request->all());
 
-        return redirect('/kas_keluar')->with('create', 'Data Kas Keluar Berhasil diinputkan');
+        $penjualan = \App\Penjualan::create($request->except('submit'));
+        return redirect()->route('penjualan.create');
     }
 
     /**
@@ -97,7 +93,18 @@ class KasKeluarController extends Controller
      */
     public function destroy($id)
     {
-        KasKeluar::where('id_kk', $id)->delete();
-        return redirect('/kas_keluar')->with('delete', 'Data Kas Keluar Berhasil Dihapus');
+        $penjualan = \App\Penjualan::findOrFail($id);
+        if(!$penjualan){
+            return redirect()->back();
+        }
+        $penjualan->delete();
+        return redirect()->back();
+    }
+
+    public function save()
+    {
+        $penjualan = \App\Penjualan::where('status','0');
+        $penjualan->update(['status'=>'1']);
+        return redirect('/penjualan')->with('create','Transaksi Penjualan Berhasil Diinputkan');
     }
 }

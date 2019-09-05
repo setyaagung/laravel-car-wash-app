@@ -17,13 +17,13 @@
 						<div class="panel-body">
                             <form action="{{route('kas_masuk.store')}}" method="POST">
                             {{ csrf_field() }}
-                            <div class="form-group @error('tanggal') has-error @enderror">
-                                <label><b>Tanggal</b></label>
-                                <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{old('tanggal')}}">
-                                @error('tanggal'))
-                                    <span class="help-block">{{ $message }}</span>
-                                @enderror
-                            </div>
+                                <div class="form-group @error('tanggal') has-error @enderror">
+                                    <label><b>Tanggal</b></label>
+                                    <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{old('tanggal')}}">
+                                    @error('tanggal')
+                                        <span class="help-block">{{ $message }}</span>
+                                    @enderror
+                                </div>
 
                                 <div class="form-group @error('user_id') has-error @enderror">
                                     <label><b>User</b></label>
@@ -51,7 +51,7 @@
                         
                                 <div class="form-group @error('layanan_id') has-error @enderror">
                                     <label><b>Layanan</b></label>
-                                    <select class="form-control dinamis" name="layanan_id" id="layanan_id">
+                                    <select class="form-control" name="layanan_id" id="layanan_id">
                                         <option value="">-- Pilih Layanan --</option>
                                         @foreach($layanan as $l)
                                             <option value="{{$l->id_layanan}}">{{$l->nama_layanan}}</option>
