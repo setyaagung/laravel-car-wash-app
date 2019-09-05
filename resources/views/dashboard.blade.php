@@ -11,35 +11,35 @@
 					<!-- OVERVIEW -->
 					<div class="panel panel-headline">
 						<div class="panel-heading">
-							<h3 class="panel-title">Weekly Overview</h3>
-							<p class="panel-subtitle">Period: Oct 14, 2016 - Oct 21, 2016</p>
+							<h3 class="panel-title">Data Keuangan Car Wash TJ88</h3>
+							<p class="panel-subtitle">Period: {{ \Carbon\Carbon::now()->format('d F Y')}}</p>
 						</div>
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-3">
 									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
+										<span class="icon"><i class="fa fa-dollar"></i></span>
 										<p>
-											<span class="number">1,252</span>
-											<span class="title">Downloads</span>
+											<span class="number">Rp {{ number_format(\DB::table('kas_masuk')->sum('total'),0, ',' , '.')}}</span>
+											<span class="title">Pemasukan</span>
 										</p>
 									</div>
 								</div>
 								<div class="col-md-3">
 									<div class="metric">
-										<span class="icon"><i class="fa fa-shopping-bag"></i></span>
+										<span class="icon"><i class="fa fa-credit-card"></i></span>
 										<p>
-											<span class="number">203</span>
-											<span class="title">Sales</span>
+											<span class="number">Rp {{ number_format(\DB::table('kas_keluar')->sum('jumlah'),0, ',' , '.')}}</span>
+											<span class="title">Pengeluaran</span>
 										</p>
 									</div>
 								</div>
 								<div class="col-md-3">
 									<div class="metric">
-										<span class="icon"><i class="fa fa-eye"></i></span>
+										<span class="icon"><i class="fa fa-money"></i></span>
 										<p>
-											<span class="number">274,678</span>
-											<span class="title">Visits</span>
+											<span class="number">Rp {{ number_format(\DB::table('kas_masuk')->sum('total') - \DB::table('kas_keluar')->sum('jumlah'),0, ',' , '.')}}</span>
+											<span class="title">Pendapatan</span>
 										</p>
 									</div>
 								</div>
@@ -47,8 +47,8 @@
 									<div class="metric">
 										<span class="icon"><i class="fa fa-bar-chart"></i></span>
 										<p>
-											<span class="number">35%</span>
-											<span class="title">Conversions</span>
+											<span class="number">{{ \DB::table('penjualan')->count()}}</span>
+											<span class="title">Penjualan</span>
 										</p>
 									</div>
 								</div>
