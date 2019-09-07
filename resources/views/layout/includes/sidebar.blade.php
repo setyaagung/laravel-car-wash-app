@@ -23,7 +23,6 @@
 						<div id="subTransaksi" class="collapse ">
 							<ul class="nav">
 								<li><a href="/penjualan" class="">Penjualan</a></li>
-								<li><a href="#" class="">Pembelian</a></li>
 							</ul>
 						</div>
 				</li>

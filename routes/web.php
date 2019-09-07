@@ -16,8 +16,7 @@ Route::get('/', 'AuthController@login')->name('login');
 Route::post('/postlogin', 'AuthController@postlogin');
 Route::get('/logout', 'AuthController@logout');
 
-Route::group(['middleware' => ['auth', 'checkRole:admin']],function()
-{
+Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     //layanan
     Route::get('/layanan', 'LayananController@index');
     Route::post('/layanan/create', 'LayananController@create');
@@ -57,8 +56,8 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']],function()
     Route::get('/tagihan/{tagihan}/delete', 'TagihanController@delete');
 
     //laporan
-    Route::resource('/laporan_kas_masuk','LaporanKasMasukController');
-    Route::resource('/laporan_kas_keluar','LaporanKasKeluarController');
+    Route::resource('/laporan_kas_masuk', 'LaporanKasMasukController');
+    Route::resource('/laporan_kas_keluar', 'LaporanKasKeluarController');
     Route::get('/cari-laporan-km', 'LaporanKasMasukController@cari');
     Route::get('/pdf-km/{dari}/{sampai}/{shift_id}', 'LaporanKasMasukController@pdf');
     Route::get('/cari-laporan-kk', 'LaporanKasKeluarController@cari');
@@ -70,16 +69,15 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']],function()
     Route::get('/user/{user}/edit', 'UserController@edit');
     Route::post('/user/{user}/update', 'UserController@update');
     Route::get('/user/{user}/delete', 'UserController@delete');
-
 });
 
-Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']],function()
-{
+Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']], function () {
     //Dashboard
     Route::get('/dashboard', 'DashboardController@index');
     Route::resource('/kas_masuk', 'KasMasukController');
     Route::resource('/kas_keluar', 'KasKeluarController');
     Route::get('/penjualan/save', 'PenjualanController@save')->name('penjualan.save');
     Route::resource('/penjualan', 'PenjualanController');
-    
+    Route::get('/ganti-password', 'GantiPasswordController@index')->name('ganti-password.index');
+    Route::post('/ganti-password', 'GantiPasswordController@gantiPassword')->name('ganti-password.update');
 });

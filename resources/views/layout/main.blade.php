@@ -65,12 +65,20 @@
 			toastr.success("{{Session::get('create')}}", "Sukses");
 		@endif
 
+		@if (Session::has('sukses'))
+			toastr.info("{{Session::get('sukses')}}", "Welcome");
+		@endif
+
 		@if (Session::has('update'))
 			toastr.info("{{Session::get('update')}}", "Perbarui");
 		@endif
 
 		@if (Session::has('delete'))
 			toastr.error("{{Session::get('delete')}}", "Terhapus");
+		@endif
+
+		@if (Session::has('gagal'))
+			toastr.error("{{Session::get('gagal')}}", "Gagal");
 		@endif
 
 		@if (Session::has('error'))
