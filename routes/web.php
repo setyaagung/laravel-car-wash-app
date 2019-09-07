@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/karyawan/{karyawan}/profile', 'KaryawanController@profile');
     Route::post('/karyawan/{id}/addtanggungan', 'KaryawanController@addtanggungan');
     Route::post('/karyawan/{id}/addabsensi', 'KaryawanController@addabsensi');
+    Route::get('/karyawan/{karyawan}/{idtanggungan}/deletetanggungan', 'KaryawanController@deletetanggungan');
+    Route::get('/karyawan/{karyawan}/{idabsensi}/deleteabsensi', 'KaryawanController@deleteabsensi');
     Route::get('/karyawan/{karyawan}/delete', 'KaryawanController@delete');
 
     //Supplier

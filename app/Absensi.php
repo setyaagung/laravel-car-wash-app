@@ -9,10 +9,11 @@ class Absensi extends Model
 {
     use SoftDeletes;
     protected $table = 'absensi';
-    protected $fillable = ['karyawan_id', 'jenis', 'keterangan', 'denda'];
+    protected $primaryKey = 'id_absensi';
+    protected $fillable = ['tanggal', 'karyawan_id', 'jenis', 'keterangan', 'denda'];
 
     public function karyawan()
     {
-        return $this->belongsTo(Karyawan::class, 'id_karyawan');
+        return $this->belongsToMany(Karyawan::class, 'id_karyawan');
     }
 }

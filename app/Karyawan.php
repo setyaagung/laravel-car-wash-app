@@ -9,16 +9,15 @@ class Karyawan extends Model
 {
     protected $table = 'karyawan';
     protected $primaryKey = 'id_karyawan';
-    protected $fillable = ['nama', 'jenis_kelamin', 'job', 'alamat','no_hp', 'gaji', 'avatar'];
+    protected $fillable = ['nama', 'jenis_kelamin', 'job', 'alamat', 'no_hp', 'gaji', 'avatar'];
     use SoftDeletes;
 
     public function getAvatar()
     {
-        if(!$this->avatar)
-        {
+        if (!$this->avatar) {
             return asset('images/akun.png');
         }
-        return asset('images/'. $this->avatar);
+        return asset('images/' . $this->avatar);
     }
 
     public function tanggungan()

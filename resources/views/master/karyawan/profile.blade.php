@@ -24,13 +24,13 @@
 									<div class="profile-stat">
 										<div class="row">
 											<div class="col-md-4 stat-item">
-												{{$karyawan->tanggungan->count()}} <span>Tanggungan</span>
+												Rp. {{number_format($karyawan->tanggungan->sum('jumlah'),0, ',' , '.')}} <span>Tanggungan</span>
 											</div>
 											<div class="col-md-4 stat-item">
-												15 <span>Awards</span>
+												Rp. {{number_format($karyawan->absensi->sum('denda'),0, ',' , '.')}} <span>Denda</span>
 											</div>
 											<div class="col-md-4 stat-item">
-												2174 <span>Points</span>
+												Rp. {{number_format($karyawan->gaji - $karyawan->tanggungan->sum('jumlah') - $karyawan->absensi->sum('denda'),0, ',' , '.')}} <span>Total Gaji</span>
 											</div>
 										</div>
 									</div>
@@ -75,7 +75,7 @@
 											<tbody>
 											@foreach ($karyawan->tanggungan as $tanggungan)
 												<tr>
-													<td>{{$tanggungan->created_at->format('d M Y')}}</td>
+													<td>{{date('d M Y', strtotime($tanggungan->tanggal))}}</td>
 													<td>{{$tanggungan->keterangan}}</td>
 													<td>Rp. {{number_format($tanggungan->jumlah,0, ',' , '.')}}</td>
 													@if($tanggungan->status == 'Belum Lunas')
@@ -84,7 +84,7 @@
 														<td><span class="badge bg-success">Lunas</span></td>
 													@endif
 													<td>
-														<a href="#" class="btn btn-danger btn-sm delete" id="{{$tanggungan->id_tanggungan}}">Delete</a>
+														<a href="/karyawan/{{$karyawan->id_karyawan}}/{{$tanggungan->id_tanggungan}}/deletetanggungan" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data ini?');">Delete</a>
 													</td>
 												</tr>
 											@endforeach
@@ -111,12 +111,12 @@
 												<tbody>
 													@foreach ($karyawan->absensi as $absensi)
 														<tr>
-															<td>{{$absensi->created_at->format('d M Y')}}</td>
+															<td>{{date('d M Y', strtotime($absensi->tanggal))}}</td>
 															<td>{{$absensi->jenis}}</td>
 															<td>{{$absensi->keterangan}}</td>
 															<td>Rp. {{number_format($absensi->denda,0, ',' , '.')}}</td>
 															<td>
-																<a href="#" class="btn btn-danger btn-sm delete" id="{{$tanggungan->id_tanggungan}}">Delete</a>
+																<a href="/karyawan/{{$karyawan->id_karyawan}}/{{$absensi->id_absensi}}/deleteabsensi" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus data ini?');">Delete</a>
 															</td>
 														</tr>
 													@endforeach
@@ -145,7 +145,15 @@
         </div>
         <div class="modal-body">
             <form action="/karyawan/{{$karyawan->id_karyawan}}/addtanggungan" method="post" enctype="multipart/form-data">
-            @csrf
+			@csrf
+				<div class="form-group @error('tanggal') has-error @enderror">
+					<label><b>Tanggal</b></label>
+					<input type="date" class="form-control" name="tanggal" value="{{old('tanggal')}}">
+					@error('tanggal')
+						<span class="help-block">{{ $message }}</span>
+					@enderror
+				</div>
+				
 				<div class="form-group @error('keterangan') has-error @enderror">
 					<label><b>Keterangan</b></label>
 					<input type="text" class="form-control" name="keterangan" placeholder="Keterangan" value="{{old('keterangan')}}">
@@ -196,6 +204,14 @@
         <div class="modal-body">
             <form action="/karyawan/{{$karyawan->id_karyawan}}/addabsensi" method="post" enctype="multipart/form-data">
 			@csrf
+				<div class="form-group @error('tanggal') has-error @enderror">
+					<label><b>Tanggal</b></label>
+					<input type="date" class="form-control" name="tanggal" value="{{old('tanggal')}}">
+					@error('tanggal')
+						<span class="help-block">{{ $message }}</span>
+					@enderror
+				</div>
+				
 				<div class="form-group @error('jenis') has-error @enderror">
 					<label><b>Jenis</b></label>
 					<select class="form-control" name="jenis">

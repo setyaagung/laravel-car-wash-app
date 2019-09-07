@@ -115,7 +115,7 @@
                                 @foreach ($layanan as $item)
                                 <tr>
                                     <td>{{$item->kategori}}</td>
-                                    <td>{{$item->nama}}</td>
+                                    <td>{{$item->nama_layanan}}</td>
                                     <td>Rp. {{number_format($item->harga,0, ',' , '.')}}</td>
                                 </tr>
                                 @endforeach 

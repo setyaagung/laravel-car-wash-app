@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Karyawan;
 use App\Tanggungan;
 use App\Absensi;
@@ -18,7 +19,7 @@ class KaryawanController extends Controller
     public function create(Request $request)
     {
         //validasi
-    	$this->validate($request, [
+        $this->validate($request, [
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'job' => 'required',
@@ -29,8 +30,7 @@ class KaryawanController extends Controller
         ]);
 
         $karyawan = Karyawan::create($request->all());
-        if($request->hasFile('avatar'))
-        {
+        if ($request->hasFile('avatar')) {
             $request->file('avatar')->move('images/', $request->file('avatar')->getClientOriginalName());
             $karyawan->avatar = $request->file('avatar')->getClientOriginalName();
             $karyawan->save();
@@ -53,12 +53,11 @@ class KaryawanController extends Controller
             'no_hp' => 'required',
             'gaji' => 'required',
             'avatar' => 'mimes:jpeg,jpg,png',
-            
+
         ]);
 
         $karyawan->update($request->all());
-        if($request->hasFile('avatar'))
-        {
+        if ($request->hasFile('avatar')) {
             $request->file('avatar')->move('images/', $request->file('avatar')->getClientOriginalName());
             $karyawan->avatar = $request->file('avatar')->getClientOriginalName();
             $karyawan->save();
@@ -69,7 +68,7 @@ class KaryawanController extends Controller
     public function profile(Karyawan $karyawan)
     {
         $tanggungankaryawan = Tanggungan::all();
-        return view('master/karyawan/profile', compact(['karyawan','tanggungankaryawan']));
+        return view('master/karyawan/profile', compact(['karyawan', 'tanggungankaryawan']));
     }
 
     public function addtanggungan(Request $request, $id_karyawan)
@@ -77,14 +76,15 @@ class KaryawanController extends Controller
         $karyawan = Karyawan::find($id_karyawan);
         $tanggungan = Tanggungan::create([
             'karyawan_id' => $id_karyawan,
+            'tanggal' => $request->tanggal,
             'keterangan' => $request->keterangan,
             'jumlah' => $request->jumlah,
             'status' => $request->status
         ]);
-        
+
         $karyawan->tanggungan()->save($tanggungan);
 
-        return redirect('karyawan/'.$id_karyawan.'/profile')->with('create','Data Tanggungan Berhasil Ditambahkan');
+        return redirect('karyawan/' . $id_karyawan . '/profile')->with('create', 'Data Tanggungan Berhasil Ditambahkan');
     }
 
     public function addabsensi(Request $request, $id_karyawan)
@@ -92,14 +92,27 @@ class KaryawanController extends Controller
         $karyawan = Karyawan::find($id_karyawan);
         $absensi = Absensi::create([
             'karyawan_id' => $id_karyawan,
+            'tanggal' => $request->tanggal,
             'jenis' => $request->jenis,
             'keterangan' => $request->keterangan,
             'denda' => $request->denda
         ]);
-        
+
         $karyawan->absensi()->save($absensi);
 
-        return redirect('karyawan/'.$id_karyawan.'/profile')->with('create','Data Absensi Berhasil Ditambahkan');
+        return redirect('karyawan/' . $id_karyawan . '/profile')->with('create', 'Data Absensi Berhasil Ditambahkan');
+    }
+
+    public function deletetanggungan(Karyawan $karyawan, $id_tanggungan)
+    {
+        $karyawan->tanggungan()->delete($id_tanggungan);
+        return redirect()->back()->with('delete', 'Data Tanggungan Berhasil Dihapus');
+    }
+
+    public function deleteabsensi(Karyawan $karyawan, $id_absensi)
+    {
+        $karyawan->absensi()->delete($id_absensi);
+        return redirect()->back()->with('delete', 'Data Absensi Berhasil Dihapus');
     }
 
     public function delete($id)
