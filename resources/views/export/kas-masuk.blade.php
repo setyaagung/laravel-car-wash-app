@@ -23,7 +23,7 @@
 		</p>
 	</div>
 	<hr style="margin-top: 7px;color: black;margin-bottom: none;size: 2px;" />
-	<p style="text-align: center; margin-top: none;font-size: 12;">Jalan Soekarno-Hatta 58 Semarang, Telp. (024) 6746473</p>
+	<p style="text-align: center; margin-top: none;font-size: 12;">Jalan Soekarno-Hatta 49-50 Semarang, Telp. (024) 6746473</p>
     <table class="table" border="1" cellpadding="0" cellspacing="0">
         <thead>
             <tr>

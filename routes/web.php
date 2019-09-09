@@ -16,7 +16,10 @@ Route::get('/', 'AuthController@login')->name('login');
 Route::post('/postlogin', 'AuthController@postlogin');
 Route::get('/logout', 'AuthController@logout');
 
-Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
+Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']], function () {
+    //Dashboard
+    Route::get('/dashboard', 'DashboardController@index');
+
     //layanan
     Route::get('/layanan', 'LayananController@index');
     Route::post('/layanan/create', 'LayananController@create');
@@ -30,6 +33,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/karyawan/{karyawan}/edit', 'KaryawanController@edit');
     Route::post('/karyawan/{karyawan}/update', 'KaryawanController@update');
     Route::get('/karyawan/{karyawan}/profile', 'KaryawanController@profile');
+    Route::get('/karyawan/{karyawan}/gaji', 'KaryawanController@gaji');
     Route::post('/karyawan/{id}/addtanggungan', 'KaryawanController@addtanggungan');
     Route::post('/karyawan/{id}/addabsensi', 'KaryawanController@addabsensi');
     Route::get('/karyawan/{karyawan}/{idtanggungan}/deletetanggungan', 'KaryawanController@deletetanggungan');
@@ -60,6 +64,9 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     //laporan
     Route::resource('/laporan_kas_masuk', 'LaporanKasMasukController');
     Route::resource('/laporan_kas_keluar', 'LaporanKasKeluarController');
+    Route::resource('/laporan_penjualan', 'LaporanPenjualanController');
+    Route::get('/cari-laporan-penjualan', 'LaporanPenjualanController@cari');
+    Route::get('/pdf-penjualan/{dari}/{sampai}/{shift_id}', 'LaporanPenjualanController@pdf');
     Route::get('/cari-laporan-km', 'LaporanKasMasukController@cari');
     Route::get('/pdf-km/{dari}/{sampai}/{shift_id}', 'LaporanKasMasukController@pdf');
     Route::get('/cari-laporan-kk', 'LaporanKasKeluarController@cari');
@@ -71,15 +78,14 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function () {
     Route::get('/user/{user}/edit', 'UserController@edit');
     Route::post('/user/{user}/update', 'UserController@update');
     Route::get('/user/{user}/delete', 'UserController@delete');
-});
 
-Route::group(['middleware' => ['auth', 'checkRole:admin,kasir']], function () {
-    //Dashboard
-    Route::get('/dashboard', 'DashboardController@index');
+    //kas
     Route::resource('/kas_masuk', 'KasMasukController');
     Route::resource('/kas_keluar', 'KasKeluarController');
+    //penjualan
     Route::get('/penjualan/save', 'PenjualanController@save')->name('penjualan.save');
     Route::resource('/penjualan', 'PenjualanController');
+    //ganti password
     Route::get('/ganti-password', 'GantiPasswordController@index')->name('ganti-password.index');
     Route::post('/ganti-password', 'GantiPasswordController@gantiPassword')->name('ganti-password.update');
 });

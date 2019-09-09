@@ -19,7 +19,7 @@
                             {{ csrf_field() }}
                                 <div class="form-group @error('tanggal') has-error @enderror">
                                     <label><b>Tanggal</b></label>
-                                    <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{old('tanggal')}}">
+                                    <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" readonly>
                                     @error('tanggal')
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror

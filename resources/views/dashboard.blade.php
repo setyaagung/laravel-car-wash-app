@@ -12,7 +12,7 @@
 					<div class="panel panel-headline">
 						<div class="panel-heading">
 							<h3 class="panel-title">Data Keuangan Car Wash TJ88</h3>
-							<p class="panel-subtitle">Period: {{ \Carbon\Carbon::now()->format('d F Y')}}</p>
+							<p class="panel-subtitle">Period: 09 September 2019 - {{ \Carbon\Carbon::now()->format('d F Y')}}</p>
 						</div>
 						<div class="panel-body">
 							<div class="row">

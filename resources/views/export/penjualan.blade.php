@@ -19,7 +19,7 @@
 <body>
     <div style="text-align: center;">
 		
-		<p style="margin-bottom: none;font-size: 16;">LAPORAN KAS KELUAR<br/><b>CAR WASH TJ88 CABANG 1</b><br>SOEKARNO-HATTA
+		<p style="margin-bottom: none;font-size: 16;">LAPORAN PENJUALAN<br/><b>CAR WASH TJ88 CABANG 1</b><br>SOEKARNO-HATTA
 		</p>
 	</div>
 	<hr style="margin-top: 7px;color: black;margin-bottom: none;size: 2px;" />
@@ -30,30 +30,26 @@
                 <th>#</th>
                 <th>TANGGAL</th>
                 <th>SHIFT</th>
-                <th>TAGIHAN</th>
+                <th>LAYANAN</th>
+                <th>PLAT NOMOR</th>
+                <th>HARGA</th>
                 <th>JUMLAH</th>
-                <th>KETERANGAN</th>
+                <th>TOTAL</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($kaskeluar as $kk)
+            @foreach ($penjualan as $p)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{date('d M Y', strtotime($kk->tanggal))}}</td>
-                <td>{{$kk->nama_shift}}</td>
-                <td>{{$kk->kategori}}</td>
-                <td>Rp. {{number_format($kk->jumlah,0, ',' , '.')}}</td>
-                <td>{{$kk->ket}}</td>
+                <td>{{date('d M Y', strtotime($p->tanggal))}}</td>
+                <td>{{$p->nama_shift}}</td>
+                <td>{{$p->nama_layanan}}</td>
+                <td>{{$p->plat_nomor}}</td>
+                <td>Rp. {{number_format($p->harga,0, ',' , '.')}}</td>
+                <td>{{$p->jumlah}}</td>
+                <td>Rp. {{ number_format(($p->harga * $p->jumlah),0, ',' , '.')}}</td>
             </tr>
             @endforeach
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><b>TOTAL KAS KELUAR : </b></td>
-                <td><b><i>Rp. {{number_format($totalkaskeluar,0, ',' , '.')}}</i></b></td>
-                <td></td>
-            </tr>
         </tbody>
     </table>
 </body>

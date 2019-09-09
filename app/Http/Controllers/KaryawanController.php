@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Karyawan;
 use App\Tanggungan;
 use App\Absensi;
+use PDF;
 
 use Illuminate\Http\Request;
 
@@ -68,7 +69,8 @@ class KaryawanController extends Controller
     public function profile(Karyawan $karyawan)
     {
         $tanggungankaryawan = Tanggungan::all();
-        return view('master/karyawan/profile', compact(['karyawan', 'tanggungankaryawan']));
+        $absensikaryawan = Absensi::all();
+        return view('master/karyawan/profile', compact(['karyawan', 'tanggungankaryawan', 'absensikaryawan']));
     }
 
     public function addtanggungan(Request $request, $id_karyawan)
@@ -113,6 +115,15 @@ class KaryawanController extends Controller
     {
         $karyawan->absensi()->delete($id_absensi);
         return redirect()->back()->with('delete', 'Data Absensi Berhasil Dihapus');
+    }
+
+    public function gaji(Karyawan $karyawan)
+    {
+        $tanggungankaryawan = Tanggungan::all();
+        $absensikaryawan = Absensi::all();
+
+        $pdf = PDF::loadView('export.gaji', compact('tanggungankaryawan', 'absensikaryawan', 'karyawan'))->setPaper('a4', 'landscape');
+        return $pdf->download('gaji.pdf');
     }
 
     public function delete($id)

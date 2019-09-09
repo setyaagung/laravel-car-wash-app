@@ -30,7 +30,7 @@
 												Rp. {{number_format($karyawan->absensi->sum('denda'),0, ',' , '.')}} <span>Denda</span>
 											</div>
 											<div class="col-md-4 stat-item">
-												Rp. {{number_format($karyawan->gaji - $karyawan->tanggungan->sum('jumlah') - $karyawan->absensi->sum('denda'),0, ',' , '.')}} <span>Total Gaji</span>
+												<a href="/karyawan/{{$karyawan->id_karyawan}}/gaji" style="color : yellow">Rp. {{number_format($karyawan->gaji - $karyawan->tanggungan->sum('jumlah') - $karyawan->absensi->sum('denda'),0, ',' , '.')}} </a><span>Total Gaji</span>
 											</div>
 										</div>
 									</div>
@@ -148,7 +148,7 @@
 			@csrf
 				<div class="form-group @error('tanggal') has-error @enderror">
 					<label><b>Tanggal</b></label>
-					<input type="date" class="form-control" name="tanggal" value="{{old('tanggal')}}">
+					<input type="date" class="form-control" name="tanggal" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" readonly>
 					@error('tanggal')
 						<span class="help-block">{{ $message }}</span>
 					@enderror
@@ -206,7 +206,7 @@
 			@csrf
 				<div class="form-group @error('tanggal') has-error @enderror">
 					<label><b>Tanggal</b></label>
-					<input type="date" class="form-control" name="tanggal" value="{{old('tanggal')}}">
+					<input type="date" class="form-control" name="tanggal" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" readonly>
 					@error('tanggal')
 						<span class="help-block">{{ $message }}</span>
 					@enderror
