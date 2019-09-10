@@ -16,5 +16,4 @@ class Layanan extends Model
     {
         return $this->belongsTo(Penjualan::class);
     }
-
 }

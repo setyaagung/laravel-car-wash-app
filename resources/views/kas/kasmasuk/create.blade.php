@@ -19,7 +19,7 @@
                             {{ csrf_field() }}
                                 <div class="form-group @error('tanggal') has-error @enderror">
                                     <label><b>Tanggal</b></label>
-                                    <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" readonly>
+                                    <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                                     @error('tanggal')
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror
@@ -71,8 +71,8 @@
                                 </div>
     
                                 <div class="form-group @error('jumlah') has-error @enderror">
-                                    <label><b>Jumlah</b></label>
-                                    <input type="number" step="any" min="0" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah" value="{{ old('jumlah') }}">
+                                    <label><b>Unit</b></label>
+                                    <input type="number" step="any" min="0" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah Unit" value="{{ old('jumlah') }}">
                                     @error('jumlah')
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror

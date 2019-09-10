@@ -17,7 +17,7 @@
 
                                 <div class="form-group @error('tanggal') has-error @enderror">
                                     <label><b>Tanggal</b></label>
-                                    <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" readonly>
+                                    <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                                     @error('tanggal')
                                         <span class="help-block">{{ $message }}</span>
                                     @enderror

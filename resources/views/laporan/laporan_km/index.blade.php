@@ -73,8 +73,8 @@
                                             <th>SHIFT</th>
                                             <th>LAYANAN</th>
                                             <th>HARGA</th>
+                                            <th>UNIT</th>
                                             <th>JUMLAH</th>
-                                            <th>TOTAL</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -93,10 +93,17 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
+                                            <td><b>TOTAL JUMLAH UNIT : </b></td>
+                                            <td colspan="3"><b><i>{{$totaljumlah}}</i></b></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td><b>TOTAL KAS MASUK : </b></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><b><i>Rp. {{number_format($totalkasmasuk,0, ',' , '.')}}</i></b></td>
+                                            <td colspan="3"><b><i>Rp. {{number_format($totalkasmasuk,0, ',' , '.')}}</i></b></td>
                                         </tr>
                                     </tbody>
                                 </table>

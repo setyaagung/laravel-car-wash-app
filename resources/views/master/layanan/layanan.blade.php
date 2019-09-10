@@ -21,6 +21,7 @@
 									<tr>
                                         <th>NO</th>
                                         <th>KATEGORI</th>
+                                        <th>UNIT</th>
                                         <th>NAMA</th>
                                         <th>HARGA</th>
                                         <th>AKSI</th>
@@ -31,6 +32,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{$layanan->kategori}}</td>
+                                        <td>{{$layanan->unit}}</td>
                                         <td>{{$layanan->nama_layanan}}</td>
                                         <td>Rp. {{number_format($layanan->harga,0, ',' , '.')}}</td>
                                         <td>

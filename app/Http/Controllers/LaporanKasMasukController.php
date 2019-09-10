@@ -17,7 +17,7 @@ class LaporanKasMasukController extends Controller
         $user = \App\User::all();
         $layanan = \App\Layanan::all();
         $shift = \App\Shift::all();
-        return view('laporan.laporan_km.index',compact('user','shift','layanan'));   //
+        return view('laporan.laporan_km.index', compact('user', 'shift', 'layanan'));   //
     }
 
     public function cari(Request $request)
@@ -35,75 +35,125 @@ class LaporanKasMasukController extends Controller
         $sampai = date('Y-m-d', strtotime($request->sampai));
         $shift_id = $request->shift_id;
 
-        if($shift_id == 'null'){
+        if ($shift_id == 'null') {
             $kasmasuk = \DB::table('kas_masuk')
-                        ->join('users','kas_masuk.user_id', '=', 'users.id_user')
-                        ->join('shift','kas_masuk.shift_id', '=', 'shift.id_shift')
-                        ->join('layanan','kas_masuk.layanan_id', '=', 'layanan.id_layanan')
-                        ->whereBetween('tanggal',[$dari,
-                                    $sampai])->get();
+                ->join('users', 'kas_masuk.user_id', '=', 'users.id_user')
+                ->join('shift', 'kas_masuk.shift_id', '=', 'shift.id_shift')
+                ->join('layanan', 'kas_masuk.layanan_id', '=', 'layanan.id_layanan')
+                ->whereBetween('tanggal', [
+                    $dari,
+                    $sampai
+                ])->get();
 
             $totalkasmasuk = \DB::table('kas_masuk')
-                        ->join('users','kas_masuk.user_id', '=', 'users.id_user')
-                        ->join('shift','kas_masuk.shift_id', '=', 'shift.id_shift')
-                        ->join('layanan','kas_masuk.layanan_id', '=', 'layanan.id_layanan')
-                        ->whereBetween('tanggal',[$dari,
-                                    $sampai])->sum('total');
+                ->join('users', 'kas_masuk.user_id', '=', 'users.id_user')
+                ->join('shift', 'kas_masuk.shift_id', '=', 'shift.id_shift')
+                ->join('layanan', 'kas_masuk.layanan_id', '=', 'layanan.id_layanan')
+                ->whereBetween('tanggal', [
+                    $dari,
+                    $sampai
+                ])->sum('total');
+
+            $totaljumlah = \DB::table('kas_masuk')
+                ->join('users', 'kas_masuk.user_id', '=', 'users.id_user')
+                ->join('shift', 'kas_masuk.shift_id', '=', 'shift.id_shift')
+                ->join('layanan', 'kas_masuk.layanan_id', '=', 'layanan.id_layanan')
+                ->whereBetween('tanggal', [
+                    $dari,
+                    $sampai
+                ])->sum('jumlah');
+        } else {
+            $kasmasuk = \DB::table('kas_masuk')
+                ->join('users', 'kas_masuk.user_id', '=', 'users.id_user')
+                ->join('shift', 'kas_masuk.shift_id', '=', 'shift.id_shift')
+                ->join('layanan', 'kas_masuk.layanan_id', '=', 'layanan.id_layanan')
+                ->where('shift_id', $shift_id)->whereBetween('tanggal', [
+                    $dari,
+                    $sampai
+                ])->get();
+
+            $totalkasmasuk = \DB::table('kas_masuk')
+                ->join('users', 'kas_masuk.user_id', '=', 'users.id_user')
+                ->join('shift', 'kas_masuk.shift_id', '=', 'shift.id_shift')
+                ->join('layanan', 'kas_masuk.layanan_id', '=', 'layanan.id_layanan')
+                ->where('shift_id', $shift_id)->whereBetween('tanggal', [
+                    $dari,
+                    $sampai
+                ])->sum('total');
+
+            $totaljumlah = \DB::table('kas_masuk')
+                ->join('users', 'kas_masuk.user_id', '=', 'users.id_user')
+                ->join('shift', 'kas_masuk.shift_id', '=', 'shift.id_shift')
+                ->join('layanan', 'kas_masuk.layanan_id', '=', 'layanan.id_layanan')
+                ->where('shift_id', $shift_id)->whereBetween('tanggal', [
+                    $dari,
+                    $sampai
+                ])->sum('jumlah');
         }
-        else{
-            $kasmasuk = \DB::table('kas_masuk')
-                        ->join('users','kas_masuk.user_id', '=', 'users.id_user')
-                        ->join('shift','kas_masuk.shift_id', '=', 'shift.id_shift')
-                        ->join('layanan','kas_masuk.layanan_id', '=', 'layanan.id_layanan')
-                        ->where('shift_id',$shift_id)->whereBetween('tanggal',[$dari,
-                                    $sampai])->get();
 
-            $totalkasmasuk = \DB::table('kas_masuk')
-                        ->join('users','kas_masuk.user_id', '=', 'users.id_user')
-                        ->join('shift','kas_masuk.shift_id', '=', 'shift.id_shift')
-                        ->join('layanan','kas_masuk.layanan_id', '=', 'layanan.id_layanan')
-                        ->where('shift_id',$shift_id)->whereBetween('tanggal',[$dari,
-                                    $sampai])->sum('total');
-        }                        
-
-        return view('laporan.laporan_km.index', compact('kasmasuk','shift','layanan','user', 'totalkasmasuk','dari','sampai','shift_id'));
+        return view('laporan.laporan_km.index', compact('kasmasuk', 'shift', 'layanan', 'user', 'totalkasmasuk', 'dari', 'sampai', 'shift_id', 'totaljumlah'));
     }
 
     public function pdf($dari, $sampai, $shift_id)
     {
 
-        if($shift_id == 'null'){
+        if ($shift_id == 'null') {
             $kasmasuk = \DB::table('kas_masuk')
-                        ->join('users','kas_masuk.user_id', '=', 'users.id_user')
-                        ->join('shift','kas_masuk.shift_id', '=', 'shift.id_shift')
-                        ->join('layanan','kas_masuk.layanan_id', '=', 'layanan.id_layanan')
-                        ->whereBetween('tanggal',[$dari,
-                                    $sampai])->get();
+                ->join('users', 'kas_masuk.user_id', '=', 'users.id_user')
+                ->join('shift', 'kas_masuk.shift_id', '=', 'shift.id_shift')
+                ->join('layanan', 'kas_masuk.layanan_id', '=', 'layanan.id_layanan')
+                ->whereBetween('tanggal', [
+                    $dari,
+                    $sampai
+                ])->get();
 
             $totalkasmasuk = \DB::table('kas_masuk')
-                        ->join('users','kas_masuk.user_id', '=', 'users.id_user')
-                        ->join('shift','kas_masuk.shift_id', '=', 'shift.id_shift')
-                        ->join('layanan','kas_masuk.layanan_id', '=', 'layanan.id_layanan')
-                        ->whereBetween('tanggal',[$dari,
-                                    $sampai])->sum('total');
+                ->join('users', 'kas_masuk.user_id', '=', 'users.id_user')
+                ->join('shift', 'kas_masuk.shift_id', '=', 'shift.id_shift')
+                ->join('layanan', 'kas_masuk.layanan_id', '=', 'layanan.id_layanan')
+                ->whereBetween('tanggal', [
+                    $dari,
+                    $sampai
+                ])->sum('total');
+
+            $totaljumlah = \DB::table('kas_masuk')
+                ->join('users', 'kas_masuk.user_id', '=', 'users.id_user')
+                ->join('shift', 'kas_masuk.shift_id', '=', 'shift.id_shift')
+                ->join('layanan', 'kas_masuk.layanan_id', '=', 'layanan.id_layanan')
+                ->whereBetween('tanggal', [
+                    $dari,
+                    $sampai
+                ])->sum('jumlah');
+        } else {
+            $kasmasuk = \DB::table('kas_masuk')
+                ->join('users', 'kas_masuk.user_id', '=', 'users.id_user')
+                ->join('shift', 'kas_masuk.shift_id', '=', 'shift.id_shift')
+                ->join('layanan', 'kas_masuk.layanan_id', '=', 'layanan.id_layanan')
+                ->where('shift_id', $shift_id)->whereBetween('tanggal', [
+                    $dari,
+                    $sampai
+                ])->get();
+
+            $totalkasmasuk = \DB::table('kas_masuk')
+                ->join('users', 'kas_masuk.user_id', '=', 'users.id_user')
+                ->join('shift', 'kas_masuk.shift_id', '=', 'shift.id_shift')
+                ->join('layanan', 'kas_masuk.layanan_id', '=', 'layanan.id_layanan')
+                ->where('shift_id', $shift_id)->whereBetween('tanggal', [
+                    $dari,
+                    $sampai
+                ])->sum('total');
+
+            $totaljumlah = \DB::table('kas_masuk')
+                ->join('users', 'kas_masuk.user_id', '=', 'users.id_user')
+                ->join('shift', 'kas_masuk.shift_id', '=', 'shift.id_shift')
+                ->join('layanan', 'kas_masuk.layanan_id', '=', 'layanan.id_layanan')
+                ->where('shift_id', $shift_id)->whereBetween('tanggal', [
+                    $dari,
+                    $sampai
+                ])->sum('jumlah');
         }
-        else{
-            $kasmasuk = \DB::table('kas_masuk')
-                        ->join('users','kas_masuk.user_id', '=', 'users.id_user')
-                        ->join('shift','kas_masuk.shift_id', '=', 'shift.id_shift')
-                        ->join('layanan','kas_masuk.layanan_id', '=', 'layanan.id_layanan')
-                        ->where('shift_id',$shift_id)->whereBetween('tanggal',[$dari,
-                                    $sampai])->get();
 
-            $totalkasmasuk = \DB::table('kas_masuk')
-                        ->join('users','kas_masuk.user_id', '=', 'users.id_user')
-                        ->join('shift','kas_masuk.shift_id', '=', 'shift.id_shift')
-                        ->join('layanan','kas_masuk.layanan_id', '=', 'layanan.id_layanan')
-                        ->where('shift_id',$shift_id)->whereBetween('tanggal',[$dari,
-                                    $sampai])->sum('total');
-        }                          
-
-        $pdf = PDF::loadView('export.kas-masuk', compact('kasmasuk','totalkasmasuk'));
+        $pdf = PDF::loadView('export.kas-masuk', compact('kasmasuk', 'totalkasmasuk', 'totaljumlah'));
         return $pdf->download('kas-masuk.pdf');
     }
 
@@ -172,5 +222,4 @@ class LaporanKasMasukController extends Controller
     {
         //
     }
-
 }

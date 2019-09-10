@@ -32,8 +32,8 @@
                 <th>SHIFT</th>
                 <th>LAYANAN</th>
                 <th>HARGA</th>
+                <th>UNIT</th>
                 <th>JUMLAH</th>
-                <th>TOTAL</th>
             </tr>
         </thead>
         <tbody>
@@ -48,6 +48,10 @@
                 <td>Rp. {{number_format($km->total,0, ',' , '.')}}</td>
             </tr>
             @endforeach
+            <tr>
+                <td colspan="6" style="text-align:center"><b>TOTAL JUMLAH UNIT : </b></td>
+                <td><b><i>{{$totaljumlah}}</i></b></td>
+            </tr>
             <tr>
                 <td colspan="6" style="text-align:center"><b>TOTAL KAS MASUK : </b></td>
                 <td><b><i>Rp. {{number_format($totalkasmasuk,0, ',' , '.')}}</i></b></td>
